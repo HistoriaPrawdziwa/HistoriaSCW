@@ -2,14 +2,13 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8">
-  <title>Jakub P.</title>
+  <title>Test strony</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       max-width: 900px;
       margin: auto;
       padding: 20px;
-      line-height: 1.6;
       background-color: #f5f5f5;
     }
 
@@ -20,25 +19,14 @@
       border-radius: 10px;
     }
 
-    h1 {
-      font-size: 26px;
-    }
-
-    img {
+    .clock, .countdown {
       margin-top: 10px;
-      border-radius: 8px;
-    }
-
-    .clock {
       font-size: 18px;
-      margin-top: 10px;
     }
 
     .countdown {
-      font-size: 20px;
       font-weight: bold;
       color: #c00;
-      margin-top: 10px;
     }
   </style>
 </head>
@@ -53,30 +41,19 @@
   <div class="box">
     <h2>Opis</h2>
     <p>Aktualnie trwa test dla (ETAP KOŃCOWY)</p>
-
-    <img src="Screenshot1.png" alt="screen" width="100%">
-    <img src="Screenshot2.png" alt="screen" width="100%">
-    </div>
-
-  <div class="box">
-    <h2>Dodatkowe informacje</h2>
-    <p>Aktualnie trwa test dla (ETAP KOŃCOWY)</p>
-  </div>
-
-  <div class="box">
-    <h2>Analiza</h2>
-    <p>Aktualnie trwa test dla (ETAP KOŃCOWY)</p>
+    <img src="Screenshot1.png" width="100%">
+    <img src="Screenshot2.png" width="100%">
   </div>
 
   <script>
+    // 🔒 STAŁA DATA KOŃCOWA
+    const endDate = new Date("2026-06-05T00:00:00");
+
     function updateClock() {
       const now = new Date();
       document.getElementById("clock").innerText =
         "Data i godzina: " + now.toLocaleString();
     }
-
-    const endDate = new Date();
-    endDate.setDate(endDate.getDate() + 31);
 
     function updateCountdown() {
       const now = new Date();
