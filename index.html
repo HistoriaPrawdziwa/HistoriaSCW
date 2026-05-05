@@ -2,7 +2,7 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8">
-  <title>Strona testowa</title>
+  <title>Jakub.PIETRUŃKO</title>
 
   <style>
     body {
@@ -12,7 +12,7 @@
       padding: 20px;
       background-color: black;
       color: lime;
-      text-align: center; /* 👈 WYŚRODKOWANIE TEKSTU */
+      text-align: center;
     }
 
     .box {
@@ -48,14 +48,37 @@
       margin-right: auto;
     }
 
-    img {
-      margin-top: 10px;
+    /* 🔥 KARUZELA */
+    .carousel {
+      position: relative;
+      max-width: 100%;
+      margin-top: 15px;
+    }
+
+    .carousel img {
+      width: 100%;
+      display: none;
       border-radius: 8px;
       border: 1px solid lime;
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
     }
+
+    .carousel img.active {
+      display: block;
+    }
+
+    .btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.7);
+      color: lime;
+      border: 1px solid lime;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+
+    .prev { left: 10px; }
+    .next { right: 10px; }
   </style>
 </head>
 
@@ -77,8 +100,16 @@
     <h2>Opis</h2>
     <p>Aktualnie trwa test dla (ETAP KOŃCOWY)</p>
 
-    <img src="Screenshot1.png" width="100%">
-    <img src="Screenshot2.png" width="100%">
+    <!-- 🔥 KARUZELA -->
+    <div class="carousel">
+      <img src="Screenshot1.png" class="active">
+      <img src="Screenshot2.png">
+      <img src="img1.jpg">
+
+      <button class="btn prev" onclick="prevSlide()">◀</button>
+      <button class="btn next" onclick="nextSlide()">▶</button>
+    </div>
+
   </div>
 
   <a href="binarny.html">Przejdź PO WIĘCEJ SZCZEGÓŁOWYCH INFORMACJI</a>
@@ -115,9 +146,30 @@
 
     setInterval(updateClock, 1000);
     setInterval(updateCountdown, 1000);
-
     updateClock();
     updateCountdown();
+
+    // 🔥 LOGIKA KARUZELI
+    let current = 0;
+    const slides = document.querySelectorAll(".carousel img");
+
+    function showSlide(index) {
+      slides.forEach(img => img.classList.remove("active"));
+      slides[index].classList.add("active");
+    }
+
+    function nextSlide() {
+      current = (current + 1) % slides.length;
+      showSlide(current);
+    }
+
+    function prevSlide() {
+      current = (current - 1 + slides.length) % slides.length;
+      showSlide(current);
+    }
+
+    // auto przewijanie co 4 sekundy
+    setInterval(nextSlide, 4000);
   </script>
 
 </body>
