@@ -48,7 +48,6 @@
       margin-right: auto;
     }
 
-    /* 🔥 KARUZELA */
     .carousel {
       position: relative;
       max-width: 100%;
@@ -86,6 +85,11 @@
 
   <h2>Kim jest osoba opisana w materiale?</h2>
 
+  <!-- 🎧 AUDIO (UKRYTE) -->
+  <audio id="bgMusic" loop>
+    <source src="piosenka.mp3" type="audio/mpeg">
+  </audio>
+
   <video controls width="100%">
     <source src="videotest1.mp4" type="video/mp4">
     Twoja przeglądarka nie obsługuje wideo.
@@ -102,7 +106,6 @@
     <h2>Opis</h2>
     <p>Aktualnie trwa test dla (ETAP KOŃCOWY)</p>
 
-    <!-- 🔥 KARUZELA -->
     <div class="carousel">
       <img src="Screenshot1.png" class="active">
       <img src="Screenshot2.png">
@@ -147,10 +150,11 @@
 
     setInterval(updateClock, 1000);
     setInterval(updateCountdown, 1000);
+
     updateClock();
     updateCountdown();
 
-    // 🔥 LOGIKA KARUZELI
+    // 🔥 KARUZELA
     let current = 0;
     const slides = document.querySelectorAll(".carousel img");
 
@@ -169,8 +173,19 @@
       showSlide(current);
     }
 
-    // auto przewijanie co 4 sekundy
     setInterval(nextSlide, 4000);
+
+    // 🎧 MUZYKA - start po pierwszej interakcji (obejście blokady autoplay)
+    const music = document.getElementById("bgMusic");
+
+    function startMusic() {
+      music.play().catch(() => {});
+      document.removeEventListener("click", startMusic);
+      document.removeEventListener("touchstart", startMusic);
+    }
+
+    document.addEventListener("click", startMusic);
+    document.addEventListener("touchstart", startMusic);
   </script>
 
 </body>
