@@ -12,26 +12,53 @@
       max-width: 900px;
       margin: auto;
       padding: 20px;
+      text-align: center;
     }
 
     .box {
       background: #111;
       padding: 15px;
-      margin-top: 15px;
+      margin-top: 20px;
       border-radius: 10px;
       border: 1px solid lime;
-    }
-
-    h1, h2 {
-      text-align: center;
     }
 
     a {
       color: cyan;
       display: block;
       margin-top: 20px;
-      text-align: center;
     }
+
+    /* KARUZELA */
+    .carousel {
+      position: relative;
+      margin-top: 15px;
+    }
+
+    .carousel img {
+      width: 100%;
+      display: none;
+      border-radius: 8px;
+      border: 1px solid lime;
+    }
+
+    .carousel img.active {
+      display: block;
+    }
+
+    .btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.7);
+      color: lime;
+      border: 1px solid lime;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+
+    .prev { left: 10px; }
+    .next { right: 10px; }
   </style>
 </head>
 
@@ -40,35 +67,77 @@
 <h1>Osoby powiązane z tematem</h1>
 
 <div class="box">
-  <h2>Osoba 1</h2>
+  <h2>Osoba 1 – Szymon Ś.</h2>
   <p>
-    Osoba mająca styczność z wydarzeniami lub posiadająca wiedzę dotyczącą opisywanej sytuacji.
-    W tym miejscu można umieścić neutralny opis relacji, kontekstu lub obserwacji.
+    Osoba znana z wcześniejszych kontaktów towarzyskich. W pewnym momencie pojawiła się
+    informacja przekazana dalej w rozmowie pomiędzy znajomymi, która wzbudziła niepokój
+    i została odebrana jako nietypowa w kontekście wcześniejszych wydarzeń.
+  </p>
+
+  <p>
+    Informacja ta została następnie przytoczona w rozmowie bezpośredniej podczas przypadkowego
+    spotkania na mieście. Sytuacja ta była jedną z kilku, które w tamtym okresie skłoniły
+    mnie do ponownego przeanalizowania wcześniejszych zdarzeń oraz utrwalenia ich w formie rozmowy.
   </p>
 </div>
 
 <div class="box">
-  <h2>Osoba 2</h2>
-  <p>
-    Kolejna osoba, która może mieć wiedzę lub kontakt z opisywanymi zdarzeniami.
-    Opis powinien bazować na faktach i obserwacjach bez formułowania oskarżeń.
-  </p>
-</div>
+  <h2>Osoba 2 – Mateusz M.</h2>
 
-<div class="box">
-  <h2>Osoba 3</h2>
+  <!-- KARUZELA 7 ZDJĘĆ -->
+  <div class="carousel">
+    <img src="Mateusz1.png" class="active">
+    <img src="Mateusz2.png">
+    <img src="Mateusz3.png">
+    <img src="Mateusz4.png">
+    <img src="Mateusz5.png">
+    <img src="Mateusz6.png">
+ 
+    <button class="btn prev" onclick="prevSlide()">◀</button>
+    <button class="btn next" onclick="nextSlide()">▶</button>
+  </div>
+
   <p>
-    Dodatkowa osoba związana z tematem. Można opisać kontekst znajomości lub sytuacje,
-    w których dana osoba była obecna.
+    Osoba, z którą doszło do bezpośredniej rozmowy w przestrzeni publicznej.
+    W trakcie tej rozmowy zostały przytoczone informacje, które były wcześniej
+    przekazywane w innych kontekstach.
+  </p>
+
+  <p>
+    Spotkanie to stanowiło jeden z elementów szerszego obrazu sytuacji,
+    który skłonił do ponownego podjęcia rozmowy w formie pisemnej
+    w celu zachowania spójności informacji i ich udokumentowania.
   </p>
 </div>
 
 <p style="margin-top:30px; font-size:14px; color:gray;">
-  Uwaga: Powyższe informacje mają charakter informacyjny i opisowy. Strona przedstawia
-  subiektywną rekonstrukcję zdarzeń i nie stanowi formalnych zarzutów wobec żadnej osoby.
+  Uwaga: Treści przedstawione na stronie mają charakter opisowy i odnoszą się do subiektywnej
+  rekonstrukcji zdarzeń. Nie stanowią formalnych zarzutów wobec żadnej osoby.
 </p>
 
-<a href="index.html">← Powrót do strony głównej</a>
+<a href="index.html">← Powrót</a>
+
+<script>
+  let current = 0;
+  const slides = document.querySelectorAll(".carousel img");
+
+  function showSlide(index) {
+    slides.forEach(img => img.classList.remove("active"));
+    slides[index].classList.add("active");
+  }
+
+  function nextSlide() {
+    current = (current + 1) % slides.length;
+    showSlide(current);
+  }
+
+  function prevSlide() {
+    current = (current - 1 + slides.length) % slides.length;
+    showSlide(current);
+  }
+
+  setInterval(nextSlide, 4000);
+</script>
 
 </body>
 </html>
