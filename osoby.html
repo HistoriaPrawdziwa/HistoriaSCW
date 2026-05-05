@@ -29,36 +29,15 @@
       margin-top: 20px;
     }
 
-    /* KARUZELA */
-    .carousel {
-      position: relative;
-      margin-top: 15px;
-    }
-
-    .carousel img {
+    video {
       width: 100%;
-      display: none;
+      margin-top: 15px;
       border-radius: 8px;
       border: 1px solid lime;
-    }
-
-    .carousel img.active {
       display: block;
+      margin-left: auto;
+      margin-right: auto;
     }
-
-    .btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(0,0,0,0.7);
-      color: lime;
-      border: 1px solid lime;
-      padding: 5px 10px;
-      cursor: pointer;
-    }
-
-    .prev { left: 10px; }
-    .next { right: 10px; }
   </style>
 </head>
 
@@ -84,18 +63,11 @@
 <div class="box">
   <h2>Osoba 2 – Mateusz M.</h2>
 
-  <!-- KARUZELA 7 ZDJĘĆ -->
-  <div class="carousel">
-    <img src="Mateusz1.png" class="active">
-    <img src="Mateusz2.png">
-    <img src="Mateusz3.png">
-    <img src="Mateusz4.png">
-    <img src="Mateusz5.png">
-    <img src="Mateusz6.png">
- 
-    <button class="btn prev" onclick="prevSlide()">◀</button>
-    <button class="btn next" onclick="nextSlide()">▶</button>
-  </div>
+  <!-- 🎬 WIDEO -->
+  <video controls>
+    <source src="mateusz1.mp4" type="video/mp4">
+    Twoja przeglądarka nie obsługuje wideo.
+  </video>
 
   <p>
     Osoba, z którą doszło do bezpośredniej rozmowy w przestrzeni publicznej.
@@ -116,28 +88,6 @@
 </p>
 
 <a href="index.html">← Powrót</a>
-
-<script>
-  let current = 0;
-  const slides = document.querySelectorAll(".carousel img");
-
-  function showSlide(index) {
-    slides.forEach(img => img.classList.remove("active"));
-    slides[index].classList.add("active");
-  }
-
-  function nextSlide() {
-    current = (current + 1) % slides.length;
-    showSlide(current);
-  }
-
-  function prevSlide() {
-    current = (current - 1 + slides.length) % slides.length;
-    showSlide(current);
-  }
-
-  setInterval(nextSlide, 4000);
-</script>
 
 </body>
 </html>
