@@ -59,4 +59,59 @@
   <video controls width="100%">
     <source src="videotest1.mp4" type="video/mp4">
     Twoja przeglądarka nie obsługuje wideo.
-  </
+  </video>
+
+  <h1>Aktualnie trwa test dla (ETAP KOŃCOWY)</h1>
+
+  <div class="clock" id="clock"></div>
+  <div class="countdown" id="countdown"></div>
+
+  <div class="box">
+    <h2>Opis</h2>
+    <p>Aktualnie trwa test dla (ETAP KOŃCOWY)</p>
+
+    <img src="Screenshot1.png" width="100%">
+    <img src="Screenshot2.png" width="100%">
+  </div>
+
+  <a href="binarny.html">Przejdź PO WIĘCEJ SZCZEGÓŁOWYCH INFORMACJI</a>
+
+  <script>
+    const endDate = new Date("2026-06-05T00:00:00");
+
+    function updateClock() {
+      const now = new Date();
+      document.getElementById("clock").innerText =
+        "Data i godzina: " + now.toLocaleString();
+    }
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = endDate - now;
+
+      if (diff <= 0) {
+        document.getElementById("countdown").innerText = "Czas minął";
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      document.getElementById("countdown").innerText =
+        "Pozostało: " + days + " dni, " +
+        hours + " godz., " +
+        minutes + " min., " +
+        seconds + " sek.";
+    }
+
+    setInterval(updateClock, 1000);
+    setInterval(updateCountdown, 1000);
+
+    updateClock();
+    updateCountdown();
+  </script>
+
+</body>
+</html>
