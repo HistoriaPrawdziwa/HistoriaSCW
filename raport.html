@@ -3,189 +3,114 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Raport – Dostęp Chroniony</title>
+<title>Dostęp do raportu</title>
 
 <style>
 body{
-  margin:0;
-  background:#0d1117;
-  color:#e6edf3;
-  font-family:'Segoe UI', monospace;
-  display:flex;
-  justify-content:center;
+    margin:0;
+    background:#0b1220;
+    font-family: monospace;
+    color:#00ff99;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
 }
 
 .container{
-  width:94%;
-  max-width:760px;
-  padding:40px 20px;
-}
-
-.panel{
-  background:linear-gradient(145deg,#161b22,#11161d);
-  padding:40px 30px;
-  border-radius:26px;
-  border:1px solid rgba(0,255,136,0.15);
-  box-shadow:0 0 50px rgba(0,255,136,0.05);
-}
-
-h2{
-  text-align:center;
-  color:#00ff88;
-  margin-bottom:25px;
-  font-weight:500;
-  letter-spacing:2px;
-}
-
-.secure-msg{
-  text-align:center;
-  margin-bottom:30px;
-  padding:18px;
-  border-radius:16px;
-  background:#0f141a;
-  border:1px solid rgba(255,255,255,0.08);
-  font-size:14px;
-  line-height:1.6;
-  color:#8b949e;
-}
-
-.secure-msg strong{
-  color:#ffffff;
-  letter-spacing:1px;
-}
-
-.input-box{
-  text-align:center;
+    width:90%;
+    max-width:500px;
+    background:#111827;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 0 30px #00ff9944;
+    text-align:center;
 }
 
 input{
-  background:#0f141a;
-  border:1px solid rgba(0,255,136,0.25);
-  padding:10px 14px;
-  border-radius:12px;
-  color:#fff;
-  width:70%;
-  max-width:280px;
-  font-family:monospace;
-  text-align:center;
+    width:80%;
+    padding:10px;
+    margin:15px 0;
+    background:#0b1220;
+    border:1px solid #00ff99;
+    color:#00ff99;
+    text-align:center;
+    font-size:18px;
 }
 
 button{
-  margin-top:15px;
-  padding:8px 20px;
-  border-radius:12px;
-  border:1px solid rgba(255,255,255,0.2);
-  background:#161b22;
-  color:#ffffff;
-  cursor:pointer;
-  transition:0.3s;
+    padding:10px 25px;
+    background:#1f2937;
+    border:1px solid #00ff99;
+    color:#00ff99;
+    cursor:pointer;
 }
 
 button:hover{
-  background:#1f2933;
+    background:#00ff99;
+    color:#0b1220;
 }
 
-.status{
-  text-align:center;
-  margin-top:20px;
-  font-size:13px;
-  letter-spacing:2px;
-  font-weight:bold;
+.report{
+    display:none;
+    margin-top:20px;
+    text-align:left;
+    color:#fff;
 }
-
-.output{
-  margin-top:35px;
-  background:#0f141a;
-  padding:25px;
-  border-radius:18px;
-  border:1px solid rgba(255,255,255,0.08);
-  white-space:pre-wrap;
-  line-height:1.6;
-  font-size:14px;
-  display:none;
-}
-
-.back{
-  margin-top:35px;
-  text-align:center;
-}
-
-.back a{
-  color:#ffffff;
-  text-decoration:none;
-  font-weight:bold;
-  opacity:0.7;
-}
-
-.back a:hover{
-  opacity:1;
+.error{
+    color:red;
+    margin-top:10px;
 }
 </style>
 </head>
 
 <body>
+
 <div class="container">
-<div class="panel">
 
 <h2>DOSTĘP DO RAPORTU</h2>
+<p>Dane zabezpieczone</p>
 
-<div class="secure-msg">
-<strong>DANE ZABEZPIECZONE</strong><br><br>
-Wprowadź widoczne hasło zapisane wspak.<br>
-Hasło widoczne: <strong>12345</strong>
-</div>
-
-<div class="input-box">
 <input type="password" id="password" placeholder="Wprowadź hasło">
 <br>
-<button onclick="decrypt()">ODKODUJ</button>
+<button onclick="checkPassword()">ODKODUJ</button>
+
+<div id="error" class="error"></div>
+
+<div id="report" class="report">
+
+<h3>I. DANE IDENTYFIKACYJNE</h3>
+<p>
+Imię i nazwisko: Jakub Pietrunko<br>
+Miejscowość: Syców<br>
+Kod pocztowy: 56-500<br>
+Status operacyjny: Osoba figurująca w notatkach prywatnych jako „truciciel” (określenie narracyjne).
+</p>
+
+<h3>II. DANE KONTAKTOWE</h3>
+<p>
+Numer telefonu używany do umawiania spotkań: 883 793 068<br>
+Komunikator: Messenger (kontakt poprzez profil prywatny)
+</p>
+
 </div>
 
-<div class="status" id="status"></div>
-
-<div class="output" id="output"></div>
-
-<div class="back">
-<a href="index.html">← Powrót do strony głównej</a>
-</div>
-
-</div>
 </div>
 
 <script>
-const encryptedData = `SS4gREFORSBJRERFTlRZRklLQUNZSUpORQpJbWnFgiBpIG5henc6IEpha3ViIFBpZXRydW5rbwpNaWVqc2Nvd2/Dp8WbYzogU3ljw7N3CktvZCBwb2N6dG93eTogNTYtNTAwClN0YXR1cyBvcGVyYWN5am55OgpPc29iYSBmaWd1cnVqxIVjYSB3IG5vdGF0a2FjaCBwcml3YXRueWNoIGpha28g4oCe dHJ1Y2ljaWVs4oCdIChva3JlxbNlbmllIG5hcnJhY3lqbmUuKQoKSUkuIERBTkUgS09OVEFLVE9X RQpOdW1lciB0ZWxlZm9udSB1xbN5d2FueSBkbyB1bWF3aWFuaWEgc3BvdGthxYQ6Cjg4MyA3OTMg MDY4CktvbXVuaWthdG9yOgpNZXNzZW5nZXIgKGtvbnRha3QgcG9wcnpleiBwcm9maWwgcHJ5d2F0 bnkg4oCTIGxpbmsgZG8gdXp1cGXFoW5pZW5pYSkKClNJSUkgQURSRVMgLyBMT0tBTElaQUNKQQpB ZHJlcyB6YW1pZXN6a2FuaWE6CihkbyB1enXFoW5pZW5pYSkKV3Nwx7NvxYJyxJ9uZSBnZW9ncmFm aWN6bmU6CihkbyB1enXFoW5pZW5pYSkKClZJLiBQT1dJxIVaQU5JQSBGSU5BTlNPV0UKQmFua293 b8WbIGludGVybmV0b3dhOgpSZXZvbHV0IChzemN6ZWfDoXbDoSBkbyB1enXFoW5pZW5pYSkKClYu IE5PVEFUS0EgT1BFUkFDWUpOQSAoV1NUxJpQSk5BKQpPc29iYSB1dHJ6eW15d2HFgiBzdGHEgiBr b250YWt0IHcgdXN0YWxvbnljaCBzY2hlbWF0YWNoIGtvbXVuaWthY3lqbnljaC4gU3BvdGthbmlh IG9kYnl3YcWCeSBzaeGEsSB3Y2HFgiFjZW5pcG93YW5pdSB0ZWxlZm9uaWN6bmVtLiBGb3JtYSBr b211bmlrYWNqaSBiecWCYSBza3LDs3Rvd2EsIHJ6ZWN6b3dhIGkgcG96YmF3aW9uYSB6YsSBZG55 Y2ggc3pjemVnx7N2Lg==`;
+function checkPassword(){
+    const correctPassword = "12345";
+    const entered = document.getElementById("password").value;
+    const report = document.getElementById("report");
+    const error = document.getElementById("error");
 
-function decrypt(){
-  const pass = document.getElementById("password").value.trim();
-  const status = document.getElementById("status");
-
-  if(pass === "54321"){
-    status.innerHTML = "ACCESS GRANTED";
-    status.style.color = "#00ff88";
-
-    const decoded = atob(encryptedData);
-    const output = document.getElementById("output");
-    output.style.display="block";
-    typeWriter(decoded, output);
-
-  } else {
-    status.innerHTML = "ACCESS DENIED";
-    status.style.color = "#ff4d4d";
-  }
-}
-
-function typeWriter(text, element){
-  element.innerHTML="";
-  let i=0;
-  const speed=10;
-  function typing(){
-    if(i<text.length){
-      element.innerHTML+=text.charAt(i);
-      i++;
-      setTimeout(typing,speed);
+    if(entered === correctPassword){
+        report.style.display = "block";
+        error.textContent = "";
+    } else {
+        report.style.display = "none";
+        error.textContent = "Nieprawidłowe hasło!";
     }
-  }
-  typing();
 }
 </script>
 
