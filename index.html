@@ -18,23 +18,22 @@ body {
 .container {
   width: 94%;
   max-width: 760px;
-  padding: 25px 18px 40px 18px;
+  padding: 25px 18px 60px 18px;
 }
 
 /* PANEL CZASU */
 .time-panel {
   background: #161b22;
-  border-radius: 16px;
+  border-radius: 14px;
   padding: 14px;
-  margin-bottom: 15px;
+  margin-bottom: 18px;
   text-align: center;
-  border: 1px solid rgba(0,255,136,0.15);
+  border: 1px solid rgba(255,255,255,0.05);
 }
 
 .clock {
   font-size: 12px;
   color: #8b949e;
-  margin-bottom: 4px;
 }
 
 .countdown {
@@ -44,7 +43,7 @@ body {
 }
 
 /* LINKI */
-.links-wrapper {
+.links {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -52,107 +51,128 @@ body {
 }
 
 .link-box {
-  background: #161b22;
-  border-radius: 14px;
-  padding: 12px;
-  text-align: center;
   border: 1px solid rgba(255,255,255,0.08);
-  transition: 0.3s ease;
+  border-radius: 12px;
+  padding: 10px;
+  text-align: center;
+  background: #161b22;
+  transition: 0.2s ease;
+}
+
+.link-box:hover {
+  border-color: #00ff88;
 }
 
 .link-box a {
   color: #ffffff;
   text-decoration: none;
-  font-weight: 600;
-  letter-spacing: 0.5px;
   font-size: 15px;
+  letter-spacing: 1px;
 }
 
-.link-box:hover {
-  border: 1px solid rgba(0,255,136,0.4);
-  background: #1c222b;
+/* STORY */
+h2 {
+  text-align: center;
+  color: #00ff88;
+  margin: 30px 0 20px 0;
+  font-weight: 500;
 }
 
-/* ZDJĘCIA */
 .story-image {
   width: 100%;
   max-width: 460px;
   display: block;
   margin: 35px auto;
-  border-radius: 18px;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+  border-radius: 16px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.6);
 }
 
-/* BLOK TEKSTU */
 .story {
   background: #161b22;
-  padding: 40px 30px;
-  border-radius: 22px;
+  padding: 35px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.05);
   line-height: 1.9;
   font-size: 16px;
-  border: 1px solid rgba(0,255,136,0.15);
 }
 
 .story p {
   margin-bottom: 28px;
-  text-indent: 22px;
+  text-indent: 25px;
   text-align: justify;
   font-style: italic;
 }
 
 .story strong {
-  font-weight: 700;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* ROZWIŃ */
+.toggle-btn {
+  display: block;
+  margin: 35px auto;
+  padding: 8px 18px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: transparent;
+  color: #ffffff;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.toggle-btn:hover {
+  border-color: #00ff88;
+  color: #00ff88;
+}
+
+.hidden-part {
+  display: none;
+}
+
+/* GATE */
+.gate {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.9);
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.gate-box {
+  background: #161b22;
+  padding: 35px;
+  border-radius: 18px;
+  text-align: center;
+  width: 90%;
+  max-width: 380px;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.gate-box input {
+  width: 100%;
+  padding: 10px;
+  margin: 15px 0;
+  border-radius: 8px;
+  border: none;
+  background: #0d1117;
   color: #ffffff;
 }
 
-.story p:first-child::first-letter {
-  font-size: 42px;
-  font-weight: bold;
-  float: left;
-  line-height: 1;
-  padding-right: 10px;
-  color: #00ff88;
-}
-
-h2 {
-  text-align: center;
-  color: #00ff88;
-  margin-bottom: 25px;
-  font-weight: 500;
-}
-
-/* ROZWIŃ / ZWIŃ */
-.toggle-button {
-  display: block;
-  margin: 40px auto 10px auto;
-  padding: 10px 18px;
+.gate-box button {
+  padding: 8px 18px;
   background: transparent;
   color: #ffffff;
   border: 1px solid rgba(255,255,255,0.2);
   border-radius: 20px;
   cursor: pointer;
-  transition: 0.3s ease;
 }
 
-.toggle-button:hover {
-  border-color: #00ff88;
-  color: #00ff88;
-}
-
-.collapsed {
-  max-height: 300px;
-  overflow: hidden;
-  position: relative;
-}
-
-.collapsed::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 80px;
-  background: linear-gradient(to bottom, transparent, #161b22);
+#errorMsg {
+  color: #ff4d4d;
+  font-size: 13px;
 }
 </style>
 </head>
@@ -160,18 +180,16 @@ h2 {
 <body>
 <div class="container">
 
-<!-- PANEL CZASU -->
 <div class="time-panel">
   <div class="clock" id="clock"></div>
   <div class="countdown" id="countdown"></div>
 </div>
 
-<!-- LINKI -->
-<div class="links-wrapper">
-  <div class="link-box"><a href="osoby.html">√📂 Osoby Powiązane</a></div>
-  <div class="link-box"><a href="pokoj.html">Pokój_Dowody / Audio / Video / Logi</a></div>
-  <div class="link-box"><a href="raport.html">📄 Raport Operacyjny</a></div>
-  <div class="link-box"><a href="aluzje.html">√🤬 Aluzje oraz pełne cytaty</a></div>
+<div class="links">
+  <div class="link-box"><a href="osoby.html">√📂Osoby Powiązane</a></div>
+  <div class="link-box"><a href="pokoj.html">pokój_dowody,audio oraz video,Logi.txt</a></div>
+  <div class="link-box"><a href="aluzje.html">√🤬aluzje oraz pełne cytaty</a></div>
+  <div class="link-box"><a href="#" onclick="openGate(event)">📄 Raport Operacyjny</a></div>
   <div class="link-box"><a href="dowody.zip" download>🛡 Zabezpiecz dowody</a></div>
 </div>
 
@@ -179,23 +197,36 @@ h2 {
 
 <img src="jakubp.png" class="story-image">
 
-<button class="toggle-button" onclick="toggleStory()">Rozwiń / Zwiń</button>
+<div class="story">
 
-<div class="story collapsed" id="storyContent">
+<p><strong>Nazywał się Jakub Pietrunko</strong>, znany prześmiewczo jako „Jakub ze Sycowa”. W moich notatkach figuruje jako „truciciel” — człowiek, który nie musiał podnosić głosu ani brudzić rąk krwią, by zostawić po sobie ślad.</p>
 
-<p><strong>Nazywał się Jakub Pietrunko</strong> — w tej narracji funkcjonujący również prześmiewczo jako „Jakub ze Sycowa”. W notatkach prywatnych określany był mianem „truciciela”. Była to figura symboliczna — ktoś, kto nie potrzebował krzyku ani przemocy, by wywołać konsekwencje.</p>
+<button class="toggle-btn" onclick="toggleStory()">Rozwiń dalszą część</button>
+
+<div class="hidden-part" id="moreStory">
 
 <img src="jakubap2.png" class="story-image">
 
-<p><strong>Relacja nie była przypadkowa.</strong> Kontakty następowały według powtarzalnego schematu. Spotkania ustalane były krótko i rzeczowo.</p>
+<p><strong>Dziś wiem, że to nie był proceder wobec wszystkich.</strong> Sprawa dotyczyła wyłącznie mnie — Patryka Ł. Inni kupowali i odchodzili. Ja byłem wyjątkiem.</p>
 
 <img src="jakubp3.png" class="story-image">
 
-<p><strong>Punkt przełomowy</strong> nastąpił w połowie grudnia. Data pozostaje nieprecyzyjna, jednak kontekst sytuacyjny utrwalił się wyraźnie. Z perspektywy czasu wiele wcześniejszych sygnałów nabrało innego znaczenia.</p>
-
-<p>Dalsze szczegóły zostały przeniesione do odrębnych sekcji serwisu.</p>
+<p><strong>Spotkanie przełomowe</strong> miało miejsce między 16 a 20 grudnia 2025 roku. Śnieg tłumił dźwięki miasta. Ton wiadomości był inny. Bardziej napięty.</p>
 
 </div>
+</div>
+
+</div>
+
+<!-- MODAL -->
+<div id="accessGate" class="gate">
+  <div class="gate-box">
+    <h3>DOSTĘP OGRANICZONY</h3>
+    <p style="font-size:13px;color:#8b949e;">Podpowiedź: Imię i nazwisko „truciciela”</p>
+    <input type="password" id="passwordInput" placeholder="Wprowadź hasło">
+    <button onclick="checkPassword()">Odblokuj</button>
+    <p id="errorMsg"></p>
+  </div>
 </div>
 
 <script>
@@ -210,32 +241,49 @@ function updateClock() {
 function updateCountdown() {
   const now = new Date();
   const diff = endDate - now;
-
   if (diff <= 0) {
     document.getElementById("countdown").innerText = "Czas minął";
     return;
   }
-
   const days = Math.floor(diff / (1000 * 60 * 60 * 24));
   const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
   const minutes = Math.floor((diff / (1000 * 60)) % 60);
   const seconds = Math.floor((diff / 1000) % 60);
-
   document.getElementById("countdown").innerText =
-    "Pozostało: " + days + " dni, " +
-    hours + " godz., " +
-    minutes + " min., " +
-    seconds + " sek.";
-}
-
-function toggleStory() {
-  document.getElementById("storyContent").classList.toggle("collapsed");
+    "Pozostało: " + days + " dni, " + hours + " godz., " + minutes + " min., " + seconds + " sek.";
 }
 
 setInterval(updateClock, 1000);
 setInterval(updateCountdown, 1000);
 updateClock();
 updateCountdown();
+
+/* ROZWIŃ */
+function toggleStory() {
+  const section = document.getElementById("moreStory");
+  section.style.display = section.style.display === "block" ? "none" : "block";
+}
+
+/* GATE */
+function openGate(e) {
+  e.preventDefault();
+  document.getElementById("accessGate").style.display = "flex";
+}
+
+function checkPassword() {
+  const input = document.getElementById("passwordInput").value.trim();
+  if (input === "Jakub Pietrunko") {
+    window.location.href = "raport.html";
+  } else {
+    document.getElementById("errorMsg").innerText = "Błędne hasło.";
+  }
+}
+
+document.getElementById("accessGate").addEventListener("click", function(e){
+  if(e.target === this){
+    this.style.display = "none";
+  }
+});
 </script>
 
 </body>
