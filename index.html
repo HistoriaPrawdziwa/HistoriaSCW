@@ -1,192 +1,232 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8">
-  <title>Strona testowa</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Strona testowa</title>
 
-  <style>
-    body {
-      font-family: monospace;
-      max-width: 900px;
-      margin: auto;
-      padding: 20px;
-      background-color: black;
-      color: lime;
-      text-align: center;
-    }
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', monospace;
+  background: #0d1117;
+  color: #e6edf3;
+  display: flex;
+  justify-content: center;
+}
 
-    .box {
-      background: #111;
-      padding: 15px;
-      margin-top: 20px;
-      border-radius: 10px;
-      border: 1px solid lime;
-    }
+.container {
+  width: 95%;
+  max-width: 700px;
+  padding: 20px;
+}
 
-    .clock, .countdown {
-      margin-top: 10px;
-      font-size: 18px;
-    }
+h1, h2 {
+  text-align: center;
+  color: #00ff88;
+  font-weight: 500;
+}
 
-    .countdown {
-      font-weight: bold;
-      color: red;
-    }
+h1 {
+  margin-top: 25px;
+  margin-bottom: 15px;
+}
 
-    a {
-      color: cyan;
-      display: block;
-      margin-top: 20px;
-    }
+video {
+  width: 100%;
+  max-height: 420px;
+  border-radius: 12px;
+  margin: 20px 0;
+  background: black;
+}
 
-    video {
-      margin-top: 20px;
-      border: 1px solid lime;
-      border-radius: 8px;
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-    }
+.box {
+  background: #161b22;
+  padding: 20px;
+  margin-top: 30px;
+  border-radius: 14px;
+  box-shadow: 0 0 15px rgba(0,255,136,0.08);
+  transition: 0.3s ease;
+}
 
-    .carousel {
-      position: relative;
-      max-width: 100%;
-      margin-top: 15px;
-    }
+.box:hover {
+  box-shadow: 0 0 20px rgba(0,255,136,0.18);
+}
 
-    .carousel img {
-      width: 100%;
-      display: none;
-      border-radius: 8px;
-      border: 1px solid lime;
-    }
+.clock {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 14px;
+  color: #8b949e;
+}
 
-    .carousel img.active {
-      display: block;
-    }
+.countdown {
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  color: #ff4d4d;
+  margin-top: 8px;
+}
 
-    .btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(0,0,0,0.7);
-      color: lime;
-      border: 1px solid lime;
-      padding: 5px 10px;
-      cursor: pointer;
-    }
+a {
+  display: block;
+  text-align: center;
+  margin-top: 25px;
+  color: #58a6ff;
+  text-decoration: none;
+}
 
-    .prev { left: 10px; }
-    .next { right: 10px; }
-  </style>
+a:hover {
+  text-decoration: underline;
+}
+
+.carousel {
+  position: relative;
+  margin-top: 20px;
+}
+
+.carousel img {
+  width: 100%;
+  display: none;
+  border-radius: 12px;
+}
+
+.carousel img.active {
+  display: block;
+}
+
+.btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(13,17,23,0.8);
+  color: #00ff88;
+  border: 1px solid rgba(0,255,136,0.4);
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.prev { left: 10px; }
+.next { right: 10px; }
+
+.btn:hover {
+  background: rgba(0,255,136,0.1);
+}
+
+@media (max-width: 500px) {
+  h1 { font-size: 18px; }
+  h2 { font-size: 15px; }
+}
+</style>
 </head>
 
 <body>
+<div class="container">
 
-  <h2>Kim jest osoba opisana w materiale?</h2>
+<h2>Kim jest osoba opisana w materiale?</h2>
 
-  <!-- 🎧 AUDIO (UKRYTE) -->
-  <audio id="bgMusic" loop>
-    <source src="piosenka.mp3" type="audio/mpeg">
-  </audio>
+<!-- AUDIO -->
+<audio id="bgMusic" loop>
+  <source src="piosenka.mp3" type="audio/mpeg">
+</audio>
 
-  <video controls width="100%">
-    <source src="videotest1.mp4" type="video/mp4">
-    Twoja przeglądarka nie obsługuje wideo.
-  </video>
+<video controls>
+  <source src="videotest1.mp4" type="video/mp4">
+</video>
 
-  <h1>Aktualnie trwa test dla (ETAP KOŃCOWY)</h1>
+<h1>Aktualnie trwa test (ETAP KOŃCOWY)</h1>
 
-  <a href="osoby.html">Lista osób powiązanych z tematem</a>
+<a href="osoby.html">Lista osób powiązanych z tematem</a>
 
-  <div class="clock" id="clock"></div>
-  <div class="countdown" id="countdown"></div>
+<div class="clock" id="clock"></div>
+<div class="countdown" id="countdown"></div>
 
-  <div class="box">
-    <h2>Opis</h2>
-    <p>Aktualnie trwa test dla (ETAP KOŃCOWY)</p>
+<div class="box">
+  <h2>Opis</h2>
+  <p style="text-align:center;">Aktualnie trwa test (ETAP KOŃCOWY)</p>
 
-    <div class="carousel">
-      <img src="Screenshot1.png" class="active">
-      <img src="Screenshot2.png">
+  <div class="carousel">
+    <img src="Screenshot1.png" class="active">
+    <img src="Screenshot2.png">
 
-      <button class="btn prev" onclick="prevSlide()">◀</button>
-      <button class="btn next" onclick="nextSlide()">▶</button>
-    </div>
-
+    <button class="btn prev" onclick="prevSlide()">◀</button>
+    <button class="btn next" onclick="nextSlide()">▶</button>
   </div>
+</div>
 
-  <a href="binarny.html">Przejdź PO WIĘCEJ SZCZEGÓŁOWYCH INFORMACJI</a>
+<a href="binarny.html">Przejdź po więcej szczegółowych informacji</a>
 
-  <script>
-    const endDate = new Date("2026-06-05T00:00:00");
+</div>
 
-    function updateClock() {
-      const now = new Date();
-      document.getElementById("clock").innerText =
-        "Data i godzina: " + now.toLocaleString();
-    }
+<script>
+const endDate = new Date("2026-06-05T00:00:00");
 
-    function updateCountdown() {
-      const now = new Date();
-      const diff = endDate - now;
+function updateClock() {
+  const now = new Date();
+  document.getElementById("clock").innerText =
+    "Data i godzina: " + now.toLocaleString();
+}
 
-      if (diff <= 0) {
-        document.getElementById("countdown").innerText = "Czas minął";
-        return;
-      }
+function updateCountdown() {
+  const now = new Date();
+  const diff = endDate - now;
 
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const minutes = Math.floor((diff / (1000 * 60)) % 60);
-      const seconds = Math.floor((diff / 1000) % 60);
+  if (diff <= 0) {
+    document.getElementById("countdown").innerText = "Czas minął";
+    return;
+  }
 
-      document.getElementById("countdown").innerText =
-        "Pozostało: " + days + " dni, " +
-        hours + " godz., " +
-        minutes + " min., " +
-        seconds + " sek.";
-    }
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((diff / (1000 * 60)) % 60);
+  const seconds = Math.floor((diff / 1000) % 60);
 
-    setInterval(updateClock, 1000);
-    setInterval(updateCountdown, 1000);
+  document.getElementById("countdown").innerText =
+    "Pozostało: " + days + " dni, " +
+    hours + " godz., " +
+    minutes + " min., " +
+    seconds + " sek.";
+}
 
-    updateClock();
-    updateCountdown();
+setInterval(updateClock, 1000);
+setInterval(updateCountdown, 1000);
+updateClock();
+updateCountdown();
 
-    // 🔥 KARUZELA
-    let current = 0;
-    const slides = document.querySelectorAll(".carousel img");
+/* KARUZELA */
+let current = 0;
+const slides = document.querySelectorAll(".carousel img");
 
-    function showSlide(index) {
-      slides.forEach(img => img.classList.remove("active"));
-      slides[index].classList.add("active");
-    }
+function showSlide(index) {
+  slides.forEach(img => img.classList.remove("active"));
+  slides[index].classList.add("active");
+}
 
-    function nextSlide() {
-      current = (current + 1) % slides.length;
-      showSlide(current);
-    }
+function nextSlide() {
+  current = (current + 1) % slides.length;
+  showSlide(current);
+}
 
-    function prevSlide() {
-      current = (current - 1 + slides.length) % slides.length;
-      showSlide(current);
-    }
+function prevSlide() {
+  current = (current - 1 + slides.length) % slides.length;
+  showSlide(current);
+}
 
-    setInterval(nextSlide, 4000);
+setInterval(nextSlide, 4000);
 
-    // 🎧 MUZYKA - start po pierwszej interakcji (obejście blokady autoplay)
-    const music = document.getElementById("bgMusic");
+/* MUZYKA */
+const music = document.getElementById("bgMusic");
 
-    function startMusic() {
-      music.play().catch(() => {});
-      document.removeEventListener("click", startMusic);
-      document.removeEventListener("touchstart", startMusic);
-    }
+function startMusic() {
+  music.play().catch(() => {});
+  document.removeEventListener("click", startMusic);
+  document.removeEventListener("touchstart", startMusic);
+}
 
-    document.addEventListener("click", startMusic);
-    document.addEventListener("touchstart", startMusic);
-  </script>
+document.addEventListener("click", startMusic);
+document.addEventListener("touchstart", startMusic);
+</script>
 
 </body>
 </html>
