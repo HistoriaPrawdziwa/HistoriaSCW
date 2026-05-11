@@ -3,63 +3,76 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dostęp do raportu</title>
+<title>Raport Operacyjny</title>
 
 <style>
-body{
-    margin:0;
-    background:#0b1220;
-    font-family: monospace;
-    color:#00ff99;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:100vh;
+body {
+  margin: 0;
+  font-family: 'Segoe UI', monospace;
+  background: #0d1117;
+  color: #e6edf3;
+  display: flex;
+  justify-content: center;
 }
 
-.container{
-    width:90%;
-    max-width:500px;
-    background:#111827;
-    padding:30px;
-    border-radius:15px;
-    box-shadow:0 0 30px #00ff9944;
-    text-align:center;
+.container {
+  width: 94%;
+  max-width: 760px;
+  padding: 40px 18px 80px 18px;
 }
 
-input{
-    width:80%;
-    padding:10px;
-    margin:15px 0;
-    background:#0b1220;
-    border:1px solid #00ff99;
-    color:#00ff99;
-    text-align:center;
-    font-size:18px;
+h1 {
+  text-align: center;
+  color: #00ff88;
+  letter-spacing: 3px;
+  margin-bottom: 40px;
 }
 
-button{
-    padding:10px 25px;
-    background:#1f2937;
-    border:1px solid #00ff99;
-    color:#00ff99;
-    cursor:pointer;
+.report-box {
+  background: #161b22;
+  padding: 35px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.05);
+  line-height: 1.8;
+  font-size: 15px;
+  white-space: pre-wrap;
 }
 
-button:hover{
-    background:#00ff99;
-    color:#0b1220;
+.control-panel {
+  text-align: center;
+  margin-bottom: 30px;
 }
 
-.report{
-    display:none;
-    margin-top:20px;
-    text-align:left;
-    color:#fff;
+input {
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background: #0d1117;
+  color: #ffffff;
+  text-align: center;
+  width: 200px;
 }
-.error{
-    color:red;
-    margin-top:10px;
+
+button {
+  padding: 8px 18px;
+  margin-left: 10px;
+  background: transparent;
+  color: #ffffff;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  border-color: #00ff88;
+  color: #00ff88;
+}
+
+#msg {
+  text-align: center;
+  margin-top: 15px;
+  min-height: 20px;
 }
 </style>
 </head>
@@ -68,50 +81,48 @@ button:hover{
 
 <div class="container">
 
-<h2>DOSTĘP DO RAPORTU</h2>
-<p>Dane zabezpieczone</p>
+<h1>RAPORT OPERACYJNY</h1>
 
-<input type="password" id="password" placeholder="Wprowadź hasło">
-<br>
-<button onclick="checkPassword()">ODKODUJ</button>
+<div class="control-panel">
+  <input type="password" id="raportPass" placeholder="Wpisz hasło aby zaszyfrować">
+  <button onclick="encryptView()">Zaszyfruj widok</button>
+</div>
 
-<div id="error" class="error"></div>
+<div id="msg"></div>
 
-<div id="report" class="report">
+<div class="report-box" id="reportContent">
+I. DANE IDENTYFIKACYJNE
+Imię i nazwisko: Jakub Pietrunko
+Miejscowość: Syców
+Kod pocztowy: 56-500
 
-<h3>I. DANE IDENTYFIKACYJNE</h3>
-<p>
-Imię i nazwisko: Jakub Pietrunko<br>
-Miejscowość: Syców<br>
-Kod pocztowy: 56-500<br>
-Status operacyjny: Osoba figurująca w notatkach prywatnych jako „truciciel” (określenie narracyjne).
-</p>
+II. DANE KONTAKTOWE
+Numer telefonu: 883 793 068
+Komunikator: Messenger
 
-<h3>II. DANE KONTAKTOWE</h3>
-<p>
-Numer telefonu używany do umawiania spotkań: 883 793 068<br>
-Komunikator: Messenger (kontakt poprzez profil prywatny)
-</p>
-
+III. NOTATKA OPERACYJNA
+Osoba utrzymywała stały kontakt w ustalonych schematach komunikacyjnych.
+Spotkania odbywały się po wcześniejszym kontakcie telefonicznym.
 </div>
 
 </div>
 
 <script>
-function checkPassword(){
-    const correctPassword = "12345";
-    const entered = document.getElementById("password").value;
-    const report = document.getElementById("report");
-    const error = document.getElementById("error");
 
-    if(entered === correctPassword){
-        report.style.display = "block";
-        error.textContent = "";
-    } else {
-        report.style.display = "none";
-        error.textContent = "Nieprawidłowe hasło!";
-    }
+const originalText = document.getElementById("reportContent").innerText;
+
+function encryptView(){
+  const pass = document.getElementById("raportPass").value.trim();
+
+  if(pass === "jakubpietrunko"){
+      const encoded = btoa(unescape(encodeURIComponent(originalText)));
+      document.getElementById("reportContent").innerText = encoded;
+      document.getElementById("msg").innerText = "Widok zaszyfrowany.";
+  } else {
+      document.getElementById("msg").innerText = "Błędne hasło.";
+  }
 }
+
 </script>
 
 </body>
