@@ -1,57 +1,114 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8">
-  <title>Lista osób</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Osoby powiązane</title>
 
-  <style>
-    body {
-      font-family: monospace;
-      background: black;
-      color: lime;
-      max-width: 900px;
-      margin: auto;
-      padding: 20px;
-      text-align: center;
-    }
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', monospace;
+  background: #0d1117;
+  color: #e6edf3;
+  display: flex;
+  justify-content: center;
+}
 
-    .box {
-      background: #111;
-      padding: 15px;
-      margin-top: 20px;
-      border-radius: 10px;
-      border: 1px solid lime;
-    }
+.container {
+  width: 95%;
+  max-width: 700px;
+  padding: 20px;
+}
 
-    a {
-      color: cyan;
-      display: block;
-      margin-top: 20px;
-    }
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #00ff88;
+  letter-spacing: 1px;
+}
 
-    video {
-      width: 100%;
-      margin-top: 15px;
-      border-radius: 8px;
-      border: 1px solid lime;
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-    }
-  </style>
+.box {
+  background: #161b22;
+  padding: 20px;
+  margin-bottom: 30px;
+  border-radius: 14px;
+  box-shadow: 0 0 15px rgba(0,255,136,0.08);
+  transition: 0.3s ease;
+}
+
+.box:hover {
+  box-shadow: 0 0 20px rgba(0,255,136,0.18);
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 15px;
+  color: #00ff88;
+  font-weight: 500;
+}
+
+video {
+  width: 100%;
+  max-height: 420px;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  background: black;
+}
+
+p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #c9d1d9;
+  text-align: justify;
+}
+
+.note {
+  font-size: 12px;
+  color: #8b949e;
+  text-align: center;
+  margin-top: 40px;
+}
+
+a {
+  display: block;
+  text-align: center;
+  margin-top: 25px;
+  color: #58a6ff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 500px) {
+  h1 {
+    font-size: 18px;
+  }
+
+  h2 {
+    font-size: 15px;
+  }
+
+  p {
+    font-size: 13px;
+  }
+}
+</style>
 </head>
 
 <body>
+
+<div class="container">
 
 <h1>Osoby powiązane z tematem</h1>
 
 <div class="box">
   <h2>Osoba 1 – Mateusz M.</h2>
 
-  <!-- 🎬 WIDEO -->
   <video controls>
     <source src="mateusz1.mp4" type="video/mp4">
-    Twoja przeglądarka nie obsługuje wideo.
   </video>
 
   <p>
@@ -70,10 +127,8 @@
 <div class="box">
   <h2>Osoba 2 – Szymon Ś.</h2>
 
-  <!-- 🎬 WIDEO -->
   <video controls>
     <source src="Szymon1.mp4" type="video/mp4">
-    Twoja przeglądarka nie obsługuje wideo.
   </video>
 
   <p>
@@ -89,12 +144,14 @@
   </p>
 </div>
 
-<p style="margin-top:30px; font-size:14px; color:gray;">
+<div class="note">
   Uwaga: Treści przedstawione na stronie mają charakter opisowy i odnoszą się do subiektywnej
   rekonstrukcji zdarzeń. Nie stanowią formalnych zarzutów wobec żadnej osoby.
-</p>
+</div>
 
 <a href="index.html">← Powrót</a>
+
+</div>
 
 </body>
 </html>
