@@ -23,23 +23,39 @@ body{
 
 .panel{
   background:linear-gradient(145deg,#161b22,#11161d);
-  padding:35px 30px;
-  border-radius:24px;
+  padding:40px 30px;
+  border-radius:26px;
   border:1px solid rgba(0,255,136,0.15);
-  box-shadow:0 0 40px rgba(0,255,136,0.05);
+  box-shadow:0 0 50px rgba(0,255,136,0.05);
 }
 
 h2{
   text-align:center;
   color:#00ff88;
-  margin-bottom:30px;
+  margin-bottom:25px;
   font-weight:500;
+  letter-spacing:2px;
+}
+
+.secure-msg{
+  text-align:center;
+  margin-bottom:30px;
+  padding:18px;
+  border-radius:16px;
+  background:#0f141a;
+  border:1px solid rgba(255,255,255,0.08);
+  font-size:14px;
+  line-height:1.6;
+  color:#8b949e;
+}
+
+.secure-msg strong{
+  color:#ffffff;
   letter-spacing:1px;
 }
 
 .input-box{
   text-align:center;
-  margin-bottom:25px;
 }
 
 input{
@@ -49,13 +65,14 @@ input{
   border-radius:12px;
   color:#fff;
   width:70%;
-  max-width:320px;
+  max-width:280px;
   font-family:monospace;
+  text-align:center;
 }
 
 button{
   margin-top:15px;
-  padding:8px 18px;
+  padding:8px 20px;
   border-radius:12px;
   border:1px solid rgba(255,255,255,0.2);
   background:#161b22;
@@ -68,16 +85,16 @@ button:hover{
   background:#1f2933;
 }
 
-.hint{
-  margin-top:15px;
-  font-size:13px;
-  color:#8b949e;
+.status{
   text-align:center;
-  font-style:italic;
+  margin-top:20px;
+  font-size:13px;
+  letter-spacing:2px;
+  font-weight:bold;
 }
 
 .output{
-  margin-top:30px;
+  margin-top:35px;
   background:#0f141a;
   padding:25px;
   border-radius:18px;
@@ -89,16 +106,15 @@ button:hover{
 }
 
 .back{
-  margin-top:30px;
+  margin-top:35px;
   text-align:center;
 }
 
 .back a{
   color:#ffffff;
   text-decoration:none;
-  letter-spacing:1px;
   font-weight:bold;
-  opacity:0.8;
+  opacity:0.7;
 }
 
 .back a:hover{
@@ -109,9 +125,15 @@ button:hover{
 
 <body>
 <div class="container">
-
 <div class="panel">
-<h2>DOSTĘP DO RAPORTU OPERACYJNEGO</h2>
+
+<h2>DOSTĘP DO RAPORTU</h2>
+
+<div class="secure-msg">
+<strong>DANE ZABEZPIECZONE</strong><br><br>
+Wprowadź widoczne hasło zapisane wspak.<br>
+Hasło widoczne: <strong>12345</strong>
+</div>
 
 <div class="input-box">
 <input type="password" id="password" placeholder="Wprowadź hasło">
@@ -119,9 +141,7 @@ button:hover{
 <button onclick="decrypt()">ODKODUJ</button>
 </div>
 
-<div class="hint">
-Podpowiedź: imię i nazwisko zapisane małymi literami bez spacji
-</div>
+<div class="status" id="status"></div>
 
 <div class="output" id="output"></div>
 
@@ -137,13 +157,20 @@ const encryptedData = `SS4gREFORSBJRERFTlRZRklLQUNZSUpORQpJbWnFgiBpIG5henc6IEpha
 
 function decrypt(){
   const pass = document.getElementById("password").value.trim();
-  if(pass === "jakubpietrunko"){
+  const status = document.getElementById("status");
+
+  if(pass === "54321"){
+    status.innerHTML = "ACCESS GRANTED";
+    status.style.color = "#00ff88";
+
     const decoded = atob(encryptedData);
     const output = document.getElementById("output");
     output.style.display="block";
     typeWriter(decoded, output);
+
   } else {
-    alert("Nieprawidłowe hasło.");
+    status.innerHTML = "ACCESS DENIED";
+    status.style.color = "#ff4d4d";
   }
 }
 
