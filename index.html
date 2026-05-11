@@ -71,28 +71,9 @@ body {
 h2 {
   text-align: center;
   color: #00ff88;
-  margin: 35px 0 15px 0;
+  margin: 35px 0 20px 0;
   font-weight: 500;
   letter-spacing: 1px;
-}
-
-/* PRZYCISK ROZWIŃ */
-.toggle-btn {
-  display: block;
-  margin: 0 auto 25px auto;
-  background: none;
-  border: 1px solid rgba(255,255,255,0.2);
-  color: #ffffff;
-  padding: 8px 18px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 13px;
-  letter-spacing: 1px;
-  transition: 0.3s ease;
-}
-
-.toggle-btn:hover {
-  background: rgba(255,255,255,0.05);
 }
 
 /* ZDJĘCIA */
@@ -113,13 +94,6 @@ h2 {
   line-height: 1.9;
   font-size: 16px;
   border: 1px solid rgba(255,255,255,0.06);
-  overflow: hidden;
-  transition: max-height 0.6s ease, opacity 0.4s ease;
-}
-
-.story.collapsed {
-  max-height: 240px;
-  opacity: 0.85;
 }
 
 .story p {
@@ -146,20 +120,34 @@ h2 {
   color: #cccccc;
 }
 
-.story p:first-child::first-letter {
-  font-size: 42px;
-  font-weight: bold;
-  float: left;
-  line-height: 1;
-  padding-right: 8px;
-  color: #00ff88;
+/* UKRYTA CZĘŚĆ */
+.hidden-part {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.7s ease;
 }
 
-@media (max-width: 500px) {
-  .story {
-    font-size: 15px;
-    padding: 28px 20px;
-  }
+.hidden-part.open {
+  max-height: 2000px;
+}
+
+/* PRZYCISK */
+.toggle-btn {
+  display: block;
+  margin: 35px auto;
+  background: none;
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #ffffff;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  letter-spacing: 1px;
+  transition: 0.3s ease;
+}
+
+.toggle-btn:hover {
+  background: rgba(255,255,255,0.05);
 }
 </style>
 </head>
@@ -190,26 +178,32 @@ h2 {
 
 <h2>Kim jest osoba opisana w materiale?</h2>
 
-<button class="toggle-btn" onclick="toggleStory()" id="toggleBtn">
-ROZWIŃ STRONĘ
-</button>
-
-<img src="jakubp.png" class="story-image">
-
-<div class="story collapsed" id="storyBlock">
+<div class="story">
 
 <p><strong>Nazywał się Jakub Pietrunko</strong>
 <span class="alias-tag">alias: Jakub ze Sycowa</span>.
 W moich notatkach figuruje jako „truciciel” — człowiek, który nie musiał podnosić głosu ani brudzić rąk krwią, by zostawić po sobie ślad.</p>
 
-<img src="jakubap2.png" class="story-image">
+<img src="jakubp.png" class="story-image">
 
 <p><strong>Dziś wiem, że to nie był proceder wobec wszystkich.</strong> Sprawa dotyczyła wyłącznie mnie — Patryka Ł.</p>
+
+<!-- PRZYCISK W POŁOWIE -->
+<button class="toggle-btn" onclick="toggleStory()" id="toggleBtn">
+OTWÓRZ DALSZĄ CZĘŚĆ
+</button>
+
+<div class="hidden-part" id="hiddenContent">
+
+<img src="jakubap2.png" class="story-image">
+
+<p><strong>Muszę jednak doprecyzować jedną rzecz:</strong> dzień, w którym uruchomił znikające wiadomości, nastąpił znacznie wcześniej niż moment, gdy zacząłem analizować jego aluzje.</p>
 
 <img src="jakubp3.png" class="story-image">
 
 <p><strong>Spotkanie, które dziś uznaję za przełomowe,</strong> miało miejsce między 16 a 20 grudnia 2025 roku.</p>
 
+</div>
 </div>
 </div>
 
@@ -248,17 +242,16 @@ setInterval(updateCountdown, 1000);
 updateClock();
 updateCountdown();
 
-/* ROZWIŃ / ZWIŃ */
 function toggleStory() {
-  const story = document.getElementById("storyBlock");
+  const content = document.getElementById("hiddenContent");
   const btn = document.getElementById("toggleBtn");
 
-  story.classList.toggle("collapsed");
+  content.classList.toggle("open");
 
-  if (story.classList.contains("collapsed")) {
-    btn.innerText = "ROZWIŃ STRONĘ";
+  if (content.classList.contains("open")) {
+    btn.innerText = "ZWIŃ DALSZĄ CZĘŚĆ";
   } else {
-    btn.innerText = "ZWIŃ STRONĘ";
+    btn.innerText = "OTWÓRZ DALSZĄ CZĘŚĆ";
   }
 }
 </script>
