@@ -18,138 +18,134 @@ body {
 .container {
   width: 94%;
   max-width: 760px;
-  padding: 25px 18px 40px 18px;
+  padding: 20px 16px 40px 16px;
 }
 
-/* PANEL CZASU */
+/* ===== PANEL CZASU ===== */
 .time-panel {
   background: #161b22;
-  border-radius: 18px;
-  padding: 16px;
-  margin-bottom: 20px;
+  border-radius: 14px;
+  padding: 12px;
+  margin-bottom: 14px;
   text-align: center;
-  box-shadow: 0 0 30px rgba(0,255,136,0.07);
+  box-shadow: 0 0 20px rgba(0,255,136,0.05);
 }
 
 .clock {
-  font-size: 13px;
+  font-size: 12px;
   color: #8b949e;
-  margin-bottom: 6px;
 }
 
 .countdown {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
   color: #ff4d4d;
-  letter-spacing: 1px;
 }
 
-/* LINKI */
-.shadow-section {
+/* ===== LINKI ===== */
+.links-wrapper {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.link-box {
   background: linear-gradient(145deg,#11161d,#0f141a);
-  padding: 18px;
-  border-radius: 18px;
-  margin-bottom: 18px;
+  border-radius: 14px;
+  padding: 12px;
   text-align: center;
-  box-shadow: 0 0 25px rgba(255,0,0,0.15);
-}
-
-.shadow-section a {
-  font-size: 17px;
-  font-weight: bold;
-  text-decoration: none;
-  letter-spacing: 1px;
-  color: #ffffff;
+  border: 1px solid rgba(255,255,255,0.05);
   transition: 0.3s ease;
 }
 
-.shadow-section a:hover {
-  opacity: 0.7;
+.link-box a {
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 15px;
+  letter-spacing: 0.5px;
 }
 
-/* ZDJĘCIA */
+.link-box:hover {
+  background: #1a222c;
+  transform: translateY(-2px);
+}
+
+.link-box.highlight {
+  border: 1px solid rgba(255,0,0,0.4);
+}
+
+/* ===== NAGŁÓWEK ===== */
+h2 {
+  text-align: center;
+  color: #00ff88;
+  margin: 30px 0 20px 0;
+  font-weight: 500;
+}
+
+/* ===== ZDJĘCIA ===== */
 .story-image {
   width: 100%;
   max-width: 460px;
   display: block;
-  margin: 35px auto;
-  border-radius: 20px;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+  margin: 30px auto;
+  border-radius: 18px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.6);
 }
 
-/* BLOK TEKSTU */
+/* ===== STORY ===== */
 .story {
   background: linear-gradient(145deg,#161b22,#11161d);
-  padding: 40px 30px;
-  border-radius: 26px;
-  line-height: 2;
-  font-size: 17px;
-  box-shadow: 0 0 50px rgba(0,255,136,0.05);
-  border: 1px solid rgba(0,255,136,0.15);
+  padding: 30px 24px;
+  border-radius: 20px;
+  line-height: 1.9;
+  font-size: 16px;
+  border: 1px solid rgba(0,255,136,0.1);
 }
 
 .story p {
-  margin-bottom: 30px;
-  text-indent: 25px;
+  margin-bottom: 24px;
+  text-indent: 22px;
   text-align: justify;
   font-style: italic;
 }
 
 .story p strong {
-  font-weight: bold;
   color: #ffffff;
+  font-weight: bold;
 }
 
 .story p:first-child::first-letter {
-  font-size: 44px;
+  font-size: 42px;
   font-weight: bold;
   float: left;
-  line-height: 1;
-  padding-right: 10px;
+  padding-right: 8px;
   color: #00ff88;
 }
 
-h2 {
-  text-align: center;
-  color: #00ff88;
-  margin-bottom: 30px;
-  font-weight: 500;
+/* ===== ROZWIJANIE ===== */
+.more-text {
+  display: none;
+  margin-top: 15px;
 }
 
-/* ROZWIJANIE */
-.hidden-part {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.8s ease, opacity 0.6s ease;
-  opacity: 0;
-}
-
-.hidden-part.show {
-  max-height: 2000px;
-  opacity: 1;
-}
-
-.read-more-btn {
+.read-more {
   display: block;
-  margin: 30px auto 0 auto;
-  padding: 12px 25px;
-  border-radius: 25px;
-  background: #00ff88;
-  color: #0d1117;
-  font-weight: bold;
-  border: none;
+  text-align: center;
+  margin-top: 15px;
   cursor: pointer;
-  transition: 0.3s ease;
+  color: #00ff88;
+  font-weight: bold;
 }
 
-.read-more-btn:hover {
-  background: #00cc6a;
+.read-more:hover {
+  opacity: 0.7;
 }
 
+/* RESPONSYWNOŚĆ */
 @media (max-width: 500px) {
   .story {
     font-size: 15px;
-    padding: 28px 20px;
   }
 }
 </style>
@@ -163,20 +159,11 @@ h2 {
   <div class="countdown" id="countdown"></div>
 </div>
 
-<div class="shadow-section">
-  <a href="osoby.html">√📂Osoby Powiązane❗</a>
-</div>
-
-<div class="shadow-section">
-  <a href="pokoj.html">pokój_dowody,audio oraz video,Logi.txt</a>
-</div>
-
-<div class="shadow-section">
-  <a href="aluzje.html">√🤬aluzje oraz pełne cytaty❗</a>
-</div>
-
-<div class="shadow-section">
-  <a href="dowody.zip" download>🛡 ZABEZPIECZ DOWODY</a>
+<div class="links-wrapper">
+  <div class="link-box"><a href="osoby.html">√📂Osoby Powiązane❗</a></div>
+  <div class="link-box highlight"><a href="pokoj.html">pokój_dowody,audio oraz video,Logi.txt</a></div>
+  <div class="link-box"><a href="aluzje.html">√🤬aluzje oraz pełne cytaty❗</a></div>
+  <div class="link-box"><a href="dowody.zip" download>🛡 ZABEZPIECZ DOWODY</a></div>
 </div>
 
 <h2>Kim jest osoba opisana w materiale?</h2>
@@ -187,25 +174,22 @@ h2 {
 
 <p><strong>Nazywał się Jakub Pietrunko.</strong> W moich notatkach figuruje jako „truciciel” — człowiek, który nie musiał podnosić głosu ani brudzić rąk krwią, by zostawić po sobie ślad...</p>
 
+<div class="more-text" id="moreContent">
+
 <img src="jakubap2.png" class="story-image">
 
 <p><strong>Dziś wiem, że to nie był proceder wobec wszystkich.</strong> Sprawa dotyczyła wyłącznie mnie — Patryka Ł...</p>
 
-<button class="read-more-btn" onclick="toggleStory()" id="toggleBtn">
-Czytaj dalszą część
-</button>
-
-<div class="hidden-part" id="hiddenPart">
-
 <img src="jakubp3.png" class="story-image">
-
-<p><strong>Muszę jednak doprecyzować jedną rzecz:</strong> dzień, w którym uruchomił znikające wiadomości...</p>
 
 <p><strong>Spotkanie, które dziś uznaję za przełomowe,</strong> miało miejsce między 16 a 20 grudnia 2025 roku...</p>
 
-<p>Nie wiedziałem jeszcze, że idę nie po zwykłą działkę, lecz po początek historii, którą dopiero później zacznę składać w całość.</p>
+<p>Zwykle oznaczało to drobną przysługę — papierosy, piwo ze stacji...</p>
 
 </div>
+
+<span class="read-more" onclick="toggleText()">▼ Rozwiń dalszą część</span>
+
 </div>
 </div>
 
@@ -239,16 +223,16 @@ function updateCountdown() {
     seconds + " sek.";
 }
 
-function toggleStory() {
-  const hidden = document.getElementById("hiddenPart");
-  const btn = document.getElementById("toggleBtn");
+function toggleText() {
+  const content = document.getElementById("moreContent");
+  const button = document.querySelector(".read-more");
 
-  hidden.classList.toggle("show");
-
-  if (hidden.classList.contains("show")) {
-    btn.innerText = "Zwiń historię";
+  if (content.style.display === "block") {
+    content.style.display = "none";
+    button.innerText = "▼ Rozwiń dalszą część";
   } else {
-    btn.innerText = "Czytaj dalszą część";
+    content.style.display = "block";
+    button.innerText = "▲ Zwiń";
   }
 }
 
