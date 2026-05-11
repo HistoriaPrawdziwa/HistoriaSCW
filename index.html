@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sycowski_Truciciel</title>
+<title>Strona testowa</title>
 
 <style>
 body {
@@ -45,18 +45,32 @@ body {
   letter-spacing: 1px;
 }
 
-/* NAGŁÓWEK */
 h2 {
   text-align: center;
   color: #00ff88;
   font-weight: 500;
+  margin-bottom: 20px;
+}
+
+/* ZDJĘCIE */
+.intro-image {
+  width: 100%;
+  max-width: 420px;
+  display: block;
+  margin: 0 auto 25px auto;
+  border-radius: 14px;
+  box-shadow: 0 0 25px rgba(0,255,136,0.15);
+  transition: 0.4s ease;
+}
+
+.intro-image:hover {
+  transform: scale(1.02);
 }
 
 /* BOX OPISU */
 .intro-box {
   background: #161b22;
   padding: 28px;
-  margin-top: 20px;
   border-radius: 16px;
   box-shadow: 0 0 18px rgba(0,255,136,0.08);
   line-height: 1.8;
@@ -76,20 +90,6 @@ h2 {
 .important {
   color: #ff4d4d;
   font-weight: bold;
-}
-
-.intro-image {
-  width: 100%;
-  max-width: 420px;
-  display: block;
-  margin: 25px auto 0 auto;
-  border-radius: 14px;
-  box-shadow: 0 0 25px rgba(0,255,136,0.15);
-  transition: 0.4s ease;
-}
-
-.intro-image:hover {
-  transform: scale(1.02);
 }
 
 a {
@@ -113,7 +113,7 @@ a:hover {
 <body>
 <div class="container">
 
-<!-- PANEL CZASU NA SAMEJ GÓRZE -->
+<!-- PANEL CZASU -->
 <div class="time-panel">
   <div class="clock" id="clock"></div>
   <div class="countdown" id="countdown"></div>
@@ -121,31 +121,22 @@ a:hover {
 
 <h2>Kim jest osoba opisana w materiale?</h2>
 
+<!-- 📸 ZDJĘCIE POD NAGŁÓWKIEM -->
+<img src="jakubp.png" alt="Jakub Pietrunko" class="intro-image">
+
 <div class="intro-box">
 
 <p><span class="highlight">Nazywał się Jakub Pietrunko.</span>  
 W moich notatkach figuruje jako <span class="important">„truciciel”</span> — człowiek, który nie musiał podnosić głosu ani brudzić rąk krwią, by zostawić po sobie ślad.  
-Dosypywał do porcji, które sprzedawał, coś więcej niż tylko towar.  
-A ja, jako stały klient i nieświadomy narrator tej historii, długo nie rozumiałem, że w każdej działce była ukryta druga, cicha intencja.</p>
+Dosypywał do porcji coś więcej niż tylko towar.</p>
 
-<p>Dziś wiem, że <span class="important">to nie był proceder wobec wszystkich.</span>  
-Sprawa dotyczyła wyłącznie mnie — <span class="highlight">Patryka Ł.</span>  
+<p>Dziś wiem, że <span class="important">sprawa dotyczyła wyłącznie mnie — Patryka Ł.</span>  
 Inni kupowali i odchodzili. <span class="important">Ja byłem wyjątkiem.</span></p>
 
-<p>Muszę jednak doprecyzować jedną rzecz: dzień, w którym uruchomił znikające wiadomości, nastąpił znacznie wcześniej niż moment, w którym zacząłem łączyć fakty.  
-Dopiero z perspektywy czasu zrozumiałem, że <span class="important">to był pierwszy sygnał.</span></p>
-
 <p>Spotkanie miało miejsce <span class="important">między 16 a 20 grudnia 2025 roku</span>.  
-Nie pamiętam dokładnej daty, ale pamiętam śnieg — ciężki, mokry, tłumiący dźwięki miasta.</p>
-
-<p>Tym razem ton wiadomości był inny.  
-<span class="important">Krótszy. Bardziej napięty.</span>  
-Nie wiedziałem jeszcze, że idę nie po zwykłą działkę, lecz po  
-<span class="highlight">początek historii.</span></p>
+Nie wiedziałem jeszcze, że idę po początek historii.</p>
 
 </div>
-
-<img src="jakubp.png" alt="Jakub Pietrunko" class="intro-image">
 
 <a href="osoby.html">Lista osób powiązanych z tematem</a>
 
