@@ -1,1 +1,166 @@
-const encrypted = `SS4gREFORSBJRERFTlRZRklLQUNZSUpORQpJbWnFgiBpIG5henc6IEpha3ViIFBpZXRydW5rbwpNaWVqc2Nvd2/Dp8WbYzogU3ljw7N3CktvZCBwb2N6dG93eTogNTYtNTAwClN0YXR1cyBvcGVyYWN5am55OgpPc29iYSBmaWd1cnVqxIVjYSB3IG5vdGF0a2FjaCBwcml3YXRueWNoIGpha28g4oCe dHJ1Y2ljaWVs4oCdIChva3JlxbNlbmllIG5hcnJhY3lqbmUuKQoKSUkuIERBTkUgS09OVEFLVE9X RQpOdW1lciB0ZWxlZm9udSB1xbN5d2FueSBkbyB1bWF3aWFuaWEgc3BvdGthxYQ6Cjg4MyA3OTMg MDY4CktvbXVuaWthdG9yOgpNZXNzZW5nZXIgKGtvbnRha3QgcG9wcnpleiBwcm9maWwgcHJ5d2F0 bnkg4oCTIGxpbmsgZG8gdXp1cGXFoW5pZW5pYSkKClNJSUkgQURSRVMgLyBMT0tBTElaQUNKQQpB ZHJlcyB6YW1pZXN6a2FuaWE6CihkbyB1enXFoW5pZW5pYSkKV3Nwx7NvxYJyxJ9uZSBnZW9ncmFm aWN6bmU6CihkbyB1enXFoW5pZW5pYSkKClZJLiBQT1dJxIVaQU5JQSBGSU5BTlNPV0UKQmFua293 b8WbIGludGVybmV0b3dhOgpSZXZvbHV0IChzemN6ZWfDoXbDoSBkbyB1enXFoW5pZW5pYSkKClYu IE5PVEFUS0EgT1BFUkFDWUpOQSAoV1NUxJpQSk5BKQpPc29iYSB1dHJ6eW15d2HFgiBzdGHEgiBr b250YWt0IHcgdXN0YWxvbnljaCBzY2hlbWF0YWNoIGtvbXVuaWthY3lqbnljaC4gU3BvdGthbmlh IG9kYnl3YcWCeSBzaeGEsSB3Y2HFgiFjZW5pcG93YW5pdSB0ZWxlZm9uaWN6bmVtLiBGb3JtYSBr b211bmlrYWNqaSBiecWCYSBza3LDs3Rvd2EsIHJ6ZWN6b3dhIGkgcG96YmF3aW9uYSB6YsSBZG55 Y2ggc3pjemVnx7N2Lg==`;
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Raport – Dostęp Chroniony</title>
+
+<style>
+body{
+  margin:0;
+  background:#0d1117;
+  color:#e6edf3;
+  font-family:'Segoe UI', monospace;
+  display:flex;
+  justify-content:center;
+}
+
+.container{
+  width:94%;
+  max-width:760px;
+  padding:40px 20px;
+}
+
+.panel{
+  background:linear-gradient(145deg,#161b22,#11161d);
+  padding:35px 30px;
+  border-radius:24px;
+  border:1px solid rgba(0,255,136,0.15);
+  box-shadow:0 0 40px rgba(0,255,136,0.05);
+}
+
+h2{
+  text-align:center;
+  color:#00ff88;
+  margin-bottom:30px;
+  font-weight:500;
+  letter-spacing:1px;
+}
+
+.input-box{
+  text-align:center;
+  margin-bottom:25px;
+}
+
+input{
+  background:#0f141a;
+  border:1px solid rgba(0,255,136,0.25);
+  padding:10px 14px;
+  border-radius:12px;
+  color:#fff;
+  width:70%;
+  max-width:320px;
+  font-family:monospace;
+}
+
+button{
+  margin-top:15px;
+  padding:8px 18px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,0.2);
+  background:#161b22;
+  color:#ffffff;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+button:hover{
+  background:#1f2933;
+}
+
+.hint{
+  margin-top:15px;
+  font-size:13px;
+  color:#8b949e;
+  text-align:center;
+  font-style:italic;
+}
+
+.output{
+  margin-top:30px;
+  background:#0f141a;
+  padding:25px;
+  border-radius:18px;
+  border:1px solid rgba(255,255,255,0.08);
+  white-space:pre-wrap;
+  line-height:1.6;
+  font-size:14px;
+  display:none;
+}
+
+.back{
+  margin-top:30px;
+  text-align:center;
+}
+
+.back a{
+  color:#ffffff;
+  text-decoration:none;
+  letter-spacing:1px;
+  font-weight:bold;
+  opacity:0.8;
+}
+
+.back a:hover{
+  opacity:1;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<div class="panel">
+<h2>DOSTĘP DO RAPORTU OPERACYJNEGO</h2>
+
+<div class="input-box">
+<input type="password" id="password" placeholder="Wprowadź hasło">
+<br>
+<button onclick="decrypt()">ODKODUJ</button>
+</div>
+
+<div class="hint">
+Podpowiedź: imię i nazwisko „truciciela”
+</div>
+
+<div class="output" id="output"></div>
+
+<div class="back">
+<a href="index.html">← Powrót do strony głównej</a>
+</div>
+
+</div>
+</div>
+
+<script>
+const encryptedData = `SS4gREFORSBJRERFTlRZRklLQUNZSUpORQpJbWnFgiBpIG5henc6IEpha3ViIFBpZXRydW5rbwpNaWVqc2Nvd2/Dp8WbYzogU3ljw7N3CktvZCBwb2N6dG93eTogNTYtNTAwClN0YXR1cyBvcGVyYWN5am55OgpPc29iYSBmaWd1cnVqxIVjYSB3IG5vdGF0a2FjaCBwcml3YXRueWNoIGpha28g4oCe dHJ1Y2ljaWVs4oCdIChva3JlxbNlbmllIG5hcnJhY3lqbmUuKQoKSUkuIERBTkUgS09OVEFLVE9X RQpOdW1lciB0ZWxlZm9udSB1xbN5d2FueSBkbyB1bWF3aWFuaWEgc3BvdGthxYQ6Cjg4MyA3OTMg MDY4CktvbXVuaWthdG9yOgpNZXNzZW5nZXIgKGtvbnRha3QgcG9wcnpleiBwcm9maWwgcHJ5d2F0 bnkg4oCTIGxpbmsgZG8gdXp1cGXFoW5pZW5pYSkKClNJSUkgQURSRVMgLyBMT0tBTElaQUNKQQpB ZHJlcyB6YW1pZXN6a2FuaWE6CihkbyB1enXFoW5pZW5pYSkKV3Nwx7NvxYJyxJ9uZSBnZW9ncmFm aWN6bmU6CihkbyB1enXFoW5pZW5pYSkKClZJLiBQT1dJxIVaQU5JQSBGSU5BTlNPV0UKQmFua293 b8WbIGludGVybmV0b3dhOgpSZXZvbHV0IChzemN6ZWfDoXbDoSBkbyB1enXFoW5pZW5pYSkKClYu IE5PVEFUS0EgT1BFUkFDWUpOQSAoV1NUxJpQSk5BKQpPc29iYSB1dHJ6eW15d2HFgiBzdGHEgiBr b250YWt0IHcgdXN0YWxvbnljaCBzY2hlbWF0YWNoIGtvbXVuaWthY3lqbnljaC4gU3BvdGthbmlh IG9kYnl3YcWCeSBzaeGEsSB3Y2HFgiFjZW5pcG93YW5pdSB0ZWxlZm9uaWN6bmVtLiBGb3JtYSBr b211bmlrYWNqaSBiecWCYSBza3LDs3Rvd2EsIHJ6ZWN6b3dhIGkgcG96YmF3aW9uYSB6YsSBZG55 Y2ggc3pjemVnx7N2Lg==`;
+
+function decrypt(){
+  const pass = document.getElementById("password").value.trim();
+  if(pass === "Jakub Pietrunko"){
+    const decoded = atob(encryptedData);
+    const output = document.getElementById("output");
+    output.style.display="block";
+    typeWriter(decoded, output);
+  } else {
+    alert("Nieprawidłowe hasło.");
+  }
+}
+
+function typeWriter(text, element){
+  element.innerHTML="";
+  let i=0;
+  const speed=10;
+  function typing(){
+    if(i<text.length){
+      element.innerHTML+=text.charAt(i);
+      i++;
+      setTimeout(typing,speed);
+    }
+  }
+  typing();
+}
+</script>
+
+</body>
+</html>
