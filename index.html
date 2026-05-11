@@ -71,9 +71,28 @@ body {
 h2 {
   text-align: center;
   color: #00ff88;
-  margin: 35px 0 25px 0;
+  margin: 35px 0 15px 0;
   font-weight: 500;
   letter-spacing: 1px;
+}
+
+/* PRZYCISK ROZWIŃ */
+.toggle-btn {
+  display: block;
+  margin: 0 auto 25px auto;
+  background: none;
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #ffffff;
+  padding: 8px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  letter-spacing: 1px;
+  transition: 0.3s ease;
+}
+
+.toggle-btn:hover {
+  background: rgba(255,255,255,0.05);
 }
 
 /* ZDJĘCIA */
@@ -94,6 +113,13 @@ h2 {
   line-height: 1.9;
   font-size: 16px;
   border: 1px solid rgba(255,255,255,0.06);
+  overflow: hidden;
+  transition: max-height 0.6s ease, opacity 0.4s ease;
+}
+
+.story.collapsed {
+  max-height: 240px;
+  opacity: 0.85;
 }
 
 .story p {
@@ -108,7 +134,6 @@ h2 {
   color: #ffffff;
 }
 
-/* PSEUDONIM */
 .alias-tag {
   display: inline-block;
   margin-left: 6px;
@@ -142,13 +167,11 @@ h2 {
 <body>
 <div class="container">
 
-<!-- PANEL CZASU -->
 <div class="time-panel">
   <div class="clock" id="clock"></div>
   <div class="countdown" id="countdown"></div>
 </div>
 
-<!-- LINKI -->
 <div class="link-panel">
   <a href="osoby.html">√📂Osoby Powiązane❗</a>
 </div>
@@ -167,25 +190,25 @@ h2 {
 
 <h2>Kim jest osoba opisana w materiale?</h2>
 
+<button class="toggle-btn" onclick="toggleStory()" id="toggleBtn">
+ROZWIŃ STRONĘ
+</button>
+
 <img src="jakubp.png" class="story-image">
 
-<div class="story">
+<div class="story collapsed" id="storyBlock">
 
 <p><strong>Nazywał się Jakub Pietrunko</strong>
 <span class="alias-tag">alias: Jakub ze Sycowa</span>.
-W moich notatkach figuruje jako „truciciel” — człowiek, który nie musiał podnosić głosu ani brudzić rąk krwią, by zostawić po sobie ślad. Dosypywał do porcji, które sprzedawał, coś więcej niż tylko towar. A ja, jako stały klient i narrator tej historii, długo nie rozumiałem, że w każdej działce była ukryta druga, cicha intencja.</p>
+W moich notatkach figuruje jako „truciciel” — człowiek, który nie musiał podnosić głosu ani brudzić rąk krwią, by zostawić po sobie ślad.</p>
 
 <img src="jakubap2.png" class="story-image">
 
-<p><strong>Dziś wiem, że to nie był proceder wobec wszystkich.</strong> Sprawa dotyczyła wyłącznie mnie — Patryka Ł. Inni kupowali i odchodzili. Ja byłem wyjątkiem.</p>
-
-<p><strong>Muszę jednak doprecyzować jedną rzecz:</strong> dzień, w którym uruchomił znikające wiadomości na Messengerze, nastąpił znacznie wcześniej niż moment, w którym zacząłem analizować jego dziwne aluzje i łączyć fakty. Wtedy nie zwróciłem na to większej uwagi. Dopiero z perspektywy czasu zrozumiałem, że to był pierwszy sygnał.</p>
+<p><strong>Dziś wiem, że to nie był proceder wobec wszystkich.</strong> Sprawa dotyczyła wyłącznie mnie — Patryka Ł.</p>
 
 <img src="jakubp3.png" class="story-image">
 
-<p><strong>Spotkanie, które dziś uznaję za przełomowe,</strong> miało miejsce między 16 a 20 grudnia 2025 roku. Pamiętam śnieg — ciężki, mokry, tłumiący dźwięki miasta. Siedziałem w domu, gdy napisał, bym pilnie do niego podbił, bo ma sprawę.</p>
-
-<p>Zwykle oznaczało to drobną przysługę — papierosy, piwo ze stacji, coś w tym stylu. Tym razem ton był inny. Krótszy. Bardziej napięty. Umówiliśmy się w połowie drogi do jego „bazy”, czyli garażu przy domu. Nie wiedziałem jeszcze, że idę nie po zwykłą działkę, lecz po początek historii, którą dopiero później zacznę składać w całość.</p>
+<p><strong>Spotkanie, które dziś uznaję za przełomowe,</strong> miało miejsce między 16 a 20 grudnia 2025 roku.</p>
 
 </div>
 </div>
@@ -224,6 +247,20 @@ setInterval(updateClock, 1000);
 setInterval(updateCountdown, 1000);
 updateClock();
 updateCountdown();
+
+/* ROZWIŃ / ZWIŃ */
+function toggleStory() {
+  const story = document.getElementById("storyBlock");
+  const btn = document.getElementById("toggleBtn");
+
+  story.classList.toggle("collapsed");
+
+  if (story.classList.contains("collapsed")) {
+    btn.innerText = "ROZWIŃ STRONĘ";
+  } else {
+    btn.innerText = "ZWIŃ STRONĘ";
+  }
+}
 </script>
 
 </body>
