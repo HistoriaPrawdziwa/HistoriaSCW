@@ -46,18 +46,16 @@ body {
 
 /* ===== ANIMOWANA SEKCJA ===== */
 .shadow-section {
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
   background: linear-gradient(145deg,#11161d,#0f141a);
   padding: 25px;
   border-radius: 18px;
   margin-bottom: 35px;
   text-align: center;
-  overflow: hidden;
   animation: floatBox 4s ease-in-out infinite;
   box-shadow: 0 0 30px rgba(255,0,0,0.15);
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
 }
 
 .shadow-section a {
@@ -66,49 +64,47 @@ body {
   text-decoration: none;
   letter-spacing: 1px;
   color: #ff4d4d;
-  position: relative;
-  z-index: 2;
   transition: 0.3s ease;
   animation: pulseGlow 2s infinite;
 }
 
 .shadow-section a:hover {
   transform: scale(1.08);
-  color: #ff8080;
 }
 
+/* Neon puls czerwony */
 @keyframes pulseGlow {
   0% { text-shadow: 0 0 5px #ff0000; }
   50% { text-shadow: 0 0 18px #ff0000, 0 0 28px #ff4d4d; }
   100% { text-shadow: 0 0 5px #ff0000; }
 }
 
+/* ===== LINK DOWODOWY (wyróżnik) ===== */
+.evidence-link {
+  color: #ffb300 !important;
+  animation: evidencePulse 1.8s infinite;
+  position: relative;
+}
+
+.evidence-link:hover {
+  transform: scale(1.12);
+  color: #ffd54f !important;
+}
+
+@keyframes evidencePulse {
+  0% { text-shadow: 0 0 6px #ff9800; }
+  50% { text-shadow: 0 0 22px #ff9800, 0 0 35px #ff5722; }
+  100% { text-shadow: 0 0 6px #ff9800; }
+}
+
+/* unoszenie */
 @keyframes floatBox {
   0% { transform: translateY(0px); }
   50% { transform: translateY(-6px); }
   100% { transform: translateY(0px); }
 }
 
-.shadow-section::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 18px;
-  padding: 2px;
-  background: linear-gradient(45deg, #ff0000, transparent, #ff0000);
-  -webkit-mask: 
-    linear-gradient(#000 0 0) content-box, 
-    linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-          mask-composite: exclude;
-  animation: borderMove 4s linear infinite;
-}
-
-@keyframes borderMove {
-  0% { background-position: 0% 50%; }
-  100% { background-position: 200% 50%; }
-}
-
+/* NAGŁÓWEK */
 h2 {
   text-align: center;
   color: #00ff88;
@@ -116,6 +112,7 @@ h2 {
   font-weight: 500;
 }
 
+/* ZDJĘCIA */
 .story-image {
   width: 100%;
   max-width: 460px;
@@ -130,6 +127,7 @@ h2 {
   transform: scale(1.02);
 }
 
+/* BLOK TEKSTU */
 .story {
   background: linear-gradient(145deg,#161b22,#11161d);
   padding: 35px 28px;
@@ -173,6 +171,7 @@ h2 {
 
 <div class="shadow-section">
   <a href="osoby.html">√📂Osoby Powiązane❗</a>
+  <a href="dowody.html" class="evidence-link">√📁pokój_dowody,audio oraz video,Logi.txt❗</a>
   <a href="cytaty.html">√🤬aluzje oraz pełne cytaty❗</a>
 </div>
 
