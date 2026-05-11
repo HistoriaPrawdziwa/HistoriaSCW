@@ -28,13 +28,13 @@ body {
   padding: 16px;
   margin-bottom: 20px;
   text-align: center;
-  box-shadow: 0 0 30px rgba(0,255,136,0.07);
+  box-shadow: 0 0 20px rgba(255,0,0,0.15);
+  border: 1px solid rgba(255,0,0,0.2);
 }
 
 .clock {
   font-size: 13px;
   color: #8b949e;
-  margin-bottom: 6px;
 }
 
 .countdown {
@@ -44,72 +44,50 @@ body {
   letter-spacing: 1px;
 }
 
-/* ===== ANIMOWANA SEKCJA ===== */
-.shadow-section {
+/* LINKI */
+.links-container {
   display: flex;
   flex-direction: column;
-  gap: 18px;
-  background: linear-gradient(145deg,#11161d,#0f141a);
-  padding: 25px;
-  border-radius: 18px;
-  margin-bottom: 35px;
-  text-align: center;
-  animation: floatBox 4s ease-in-out infinite;
-  box-shadow: 0 0 30px rgba(255,0,0,0.15);
+  gap: 14px;
+  margin-bottom: 30px;
 }
 
-.shadow-section a {
-  font-size: 18px;
-  font-weight: bold;
+.link-box {
+  text-align: center;
+  padding: 14px;
+  border-radius: 14px;
   text-decoration: none;
+  font-weight: bold;
   letter-spacing: 1px;
-  color: #ff4d4d;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: #11161d;
+  color: #ffffff; /* zmienione na biały */
   transition: 0.3s ease;
+}
+
+.link-box:hover {
+  background: #1b222c;
+  transform: scale(1.02);
+}
+
+/* ŚRODKOWY – JEDYNA ANIMACJA */
+.link-box.highlight {
+  border: 1px solid rgba(255,0,0,0.6);
+  box-shadow: 0 0 15px rgba(255,0,0,0.3);
   animation: pulseGlow 2s infinite;
 }
 
-.shadow-section a:hover {
-  transform: scale(1.08);
-}
-
-/* Neon puls czerwony */
 @keyframes pulseGlow {
-  0% { text-shadow: 0 0 5px #ff0000; }
-  50% { text-shadow: 0 0 18px #ff0000, 0 0 28px #ff4d4d; }
-  100% { text-shadow: 0 0 5px #ff0000; }
-}
-
-/* ===== LINK DOWODOWY (wyróżnik) ===== */
-.evidence-link {
-  color: #ffb300 !important;
-  animation: evidencePulse 1.8s infinite;
-  position: relative;
-}
-
-.evidence-link:hover {
-  transform: scale(1.12);
-  color: #ffd54f !important;
-}
-
-@keyframes evidencePulse {
-  0% { text-shadow: 0 0 6px #ff9800; }
-  50% { text-shadow: 0 0 22px #ff9800, 0 0 35px #ff5722; }
-  100% { text-shadow: 0 0 6px #ff9800; }
-}
-
-/* unoszenie */
-@keyframes floatBox {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-6px); }
-  100% { transform: translateY(0px); }
+  0% { box-shadow: 0 0 5px rgba(255,0,0,0.2); }
+  50% { box-shadow: 0 0 25px rgba(255,0,0,0.6); }
+  100% { box-shadow: 0 0 5px rgba(255,0,0,0.2); }
 }
 
 /* NAGŁÓWEK */
 h2 {
   text-align: center;
   color: #00ff88;
-  margin-bottom: 30px;
-  font-weight: 500;
+  margin-bottom: 20px;
 }
 
 /* ZDJĘCIA */
@@ -117,46 +95,91 @@ h2 {
   width: 100%;
   max-width: 460px;
   display: block;
-  margin: 30px auto;
-  border-radius: 18px;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.5);
-  transition: 0.4s ease;
-}
-
-.story-image:hover {
-  transform: scale(1.02);
+  margin: 35px auto;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+  border: 1px solid rgba(255,255,255,0.1);
 }
 
 /* BLOK TEKSTU */
 .story {
   background: linear-gradient(145deg,#161b22,#11161d);
-  padding: 35px 28px;
+  padding: 35px 30px;
   border-radius: 24px;
-  line-height: 1.95;
+  line-height: 1.9;
   font-size: 16px;
-  box-shadow: 0 0 40px rgba(0,255,136,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 0 30px rgba(0,0,0,0.5);
 }
 
 .story p {
-  margin-bottom: 26px;
-  text-indent: 22px;
+  margin-bottom: 24px;
+  text-indent: 24px;
   text-align: justify;
+  font-style: italic; /* lekko pochylony tekst */
 }
 
-.story p:first-child::first-letter {
-  font-size: 42px;
+.story strong {
   font-weight: bold;
-  float: left;
-  line-height: 1;
-  padding-right: 8px;
-  color: #00ff88;
+  color: #ffffff;
 }
 
-@media (max-width: 500px) {
-  .story {
-    font-size: 15px;
-    padding: 28px 20px;
-  }
+.story em {
+  font-style: italic;
+  color: #bbbbbb;
+}
+
+/* BEZPIECZNIK */
+.notice {
+  margin-top: 40px;
+  padding: 15px;
+  border-radius: 14px;
+  text-align: center;
+  font-size: 13px;
+  color: #8b949e;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: #11161d;
+}
+
+/* OVERLAY ARCHIWUM */
+.archive-overlay {
+  position: fixed;
+  inset: 0;
+  background: #000000f0;
+  color: #00ff88;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  font-size: 18px;
+  z-index: 9999;
+  text-align: center;
+}
+
+.archive-overlay.active {
+  display: flex;
+  animation: fadeIn 0.5s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.progress-bar {
+  width: 260px;
+  height: 10px;
+  background: #111;
+  margin-top: 20px;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  width: 0%;
+  height: 100%;
+  background: #00ff88;
+  transition: width 2.5s linear;
 }
 </style>
 </head>
@@ -169,10 +192,11 @@ h2 {
   <div class="countdown" id="countdown"></div>
 </div>
 
-<div class="shadow-section">
-  <a href="osoby.html">√📂Osoby Powiązane❗</a>
-  <a href="dowody.html" class="evidence-link">√📁pokój_dowody,audio oraz video,Logi.txt❗</a>
-  <a href="cytaty.html">√🤬aluzje oraz pełne cytaty❗</a>
+<div class="links-container">
+  <a href="osoby.html" class="link-box">√📂Osoby Powiązane❗</a>
+  <a href="pokoj.html" class="link-box highlight">pokój_dowody,audio oraz video,Logi.txt</a>
+  <a href="aluzje.html" class="link-box">√🤬aluzje oraz pełne cytaty❗</a>
+  <a href="#" class="link-box" onclick="secureArchive(event)">🛡 ZABEZPIECZ DOWODY</a>
 </div>
 
 <h2>Kim jest osoba opisana w materiale?</h2>
@@ -181,30 +205,41 @@ h2 {
 
 <div class="story">
 
-<p>Nazywał się Jakub Pietrunko. W moich notatkach figuruje jako „truciciel” — człowiek, który nie musiał podnosić głosu ani brudzić rąk krwią, by zostawić po sobie ślad. Dosypywał do porcji, które sprzedawał, coś więcej niż tylko towar. A ja, jako stały klient i nieświadomy narrator tej historii, długo nie rozumiałem, że w każdej działce była ukryta druga, cicha intencja.</p>
+<p><strong>Nazywał się Jakub Pietrunko.</strong> W moich notatkach figuruje jako <em>„truciciel”</em> — człowiek, który nie musiał podnosić głosu ani brudzić rąk krwią, by zostawić po sobie ślad...</p>
 
 <img src="jakubap2.png" class="story-image">
 
-<p>Dziś wiem, że to nie był proceder wobec wszystkich. Sprawa dotyczyła wyłącznie mnie — Patryka Ł. Inni kupowali i odchodzili. Ja byłem wyjątkiem.</p>
-
-<p>Muszę jednak doprecyzować jedną rzecz: dzień, w którym uruchomił znikające wiadomości na Messengerze, nastąpił znacznie wcześniej niż ten, w którym zacząłem analizować jego dziwne aluzje i łączyć fakty. Wtedy nie zwróciłem na to większej uwagi. Ot, kolejna ostrożność w branży. Dopiero z perspektywy czasu zrozumiałem, że to był pierwszy sygnał.</p>
+<p><strong>Dziś wiem, że to nie był proceder wobec wszystkich.</strong> Sprawa dotyczyła wyłącznie mnie — Patryka Ł...</p>
 
 <img src="jakubp3.png" class="story-image">
 
-<p>Spotkanie, które dziś uznaję za przełomowe, miało miejsce między 16 a 20 grudnia 2025 roku — nie pamiętam dokładnej daty, ale jestem pewien, że był to któryś z tych dni. Pamiętam za to śnieg. Ciężki, mokry, tłumiący dźwięki miasta. Siedziałem w domu, gdy napisał, bym pilnie do niego podbił, bo ma sprawę.</p>
-
-<p>Zwykle oznaczało to drobną przysługę — papierosy, piwo ze stacji, coś w tym stylu. W zamian porcja amfetaminy. Tym razem ton był inny. Krótszy. Bardziej napięty. Umówiliśmy się w połowie drogi do jego „bazy”, czyli garażu przy domu. Nie wiedziałem jeszcze, że idę nie po zwykłą działkę, lecz po początek historii, którą dopiero później zacznę składać w całość)</p>
+<p><strong>Spotkanie, które dziś uznaję za przełomowe...</strong></p>
 
 </div>
+
+<div class="notice">
+Jeżeli strona zatrzymała się na etapie nieukończonym,
+oznacza to, że autor mógł utracić możliwość jej dalszego prowadzenia.
+</div>
+
+</div>
+
+<div class="archive-overlay" id="archiveOverlay">
+  <div>Trwa zabezpieczanie danych...</div>
+  <div class="progress-bar">
+    <div class="progress-fill" id="progressFill"></div>
+  </div>
+  <div style="margin-top:15px;font-size:14px;color:#8b949e;">
+    Tworzenie lokalnej kopii...
+  </div>
 </div>
 
 <script>
 const endDate = new Date("2026-06-05T00:00:00");
 
 function updateClock() {
-  const now = new Date();
   document.getElementById("clock").innerText =
-    "Data i godzina: " + now.toLocaleString();
+    "Data i godzina: " + new Date().toLocaleString();
 }
 
 function updateCountdown() {
@@ -232,6 +267,23 @@ setInterval(updateClock, 1000);
 setInterval(updateCountdown, 1000);
 updateClock();
 updateCountdown();
+
+/* ARCHIWUM */
+function secureArchive(event) {
+  event.preventDefault();
+  const overlay = document.getElementById("archiveOverlay");
+  const fill = document.getElementById("progressFill");
+
+  overlay.classList.add("active");
+
+  setTimeout(() => {
+    fill.style.width = "100%";
+  }, 200);
+
+  setTimeout(() => {
+    overlay.innerHTML = "<div>Kopia zabezpieczona lokalnie.</div>";
+  }, 2800);
+}
 </script>
 
 </body>
