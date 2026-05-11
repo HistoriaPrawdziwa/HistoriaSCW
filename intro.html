@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Binary Tree Intro</title>
+
+<style>
+body {
+  margin: 0;
+  background: black;
+  overflow: hidden;
+  font-family: monospace;
+  color: #00ff88;
+}
+
+canvas {
+  display: block;
+}
+
+#message {
+  position: absolute;
+  bottom: 15%;
+  width: 100%;
+  text-align: center;
+  font-size: 28px;
+  opacity: 0;
+  transition: opacity 2s ease;
+}
+
+.showText {
+  opacity: 1 !important;
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="matrix"></canvas>
+<div id="message">"Można się spotkać"</div>
+
+<script>
+const canvas = document.getElementById("matrix");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const letters = "01";
+const fontSize = 14;
+const columns = canvas.width / fontSize;
+
+const drops = [];
+
+for (let x = 0; x < columns; x++) {
+  drops[x] = Math.random() * canvas.height;
+}
+
+function drawMatrix() {
+  ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  ctx.fillStyle = "#00ff88";
+  ctx.font = fontSize + "px monospace";
+
+  for (let i = 0; i < drops.length; i++) {
+    const text = letters[Math.floor(Math.random() * letters.length)];
+    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975)
+      drops[i] = 0;
+
+    drops[i]++;
+  }
+}
+
+let matrixInterval = setInterval(drawMatrix, 33);
+
+// Po 4 sekundach zatrzymaj matrix i narysuj drzewo
+setTimeout(() => {
+  clearInterval(matrixInterval);
+  drawTree();
+}, 4000);
+
+function drawTree() {
+  ctx.fillStyle = "black";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  ctx.fillStyle = "#00ff88";
+  ctx.font = "12px monospace";
+
+  const centerX = canvas.width / 2;
+  const baseY = canvas.height * 0.75;
+
+  // Pień
+  for (let y = 0; y < 120; y += 10) {
+    ctx.fillText("0101", centerX - 15, baseY - y);
+  }
+
+  // Korona
+  for (let i = 0; i < 200; i++) {
+    const x = centerX + (Math.random() - 0.5) * 250;
+    const y = baseY - 120 - Math.random() * 200;
+    ctx.fillText(
+      Math.random() > 0.5 ? "0" : "1",
+      x,
+      y
+    );
+  }
+
+  document.getElementById("message").classList.add("showText");
+}
+
+window.addEventListener("resize", () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
+</script>
+
+</body>
+</html>
