@@ -6,19 +6,43 @@
 <title>Sycowski_Truciciel</title>
 
 <style>
+/* ===== TŁO GLOBALNE ===== */
 body {
   margin: 0;
   font-family: 'Segoe UI', monospace;
-  background: #0d1117;
   color: #e6edf3;
   display: flex;
   justify-content: center;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: radial-gradient(circle at 20% 30%, rgba(0,255,136,0.08), transparent 40%),
+              radial-gradient(circle at 80% 70%, rgba(255,0,0,0.06), transparent 40%),
+              linear-gradient(135deg, #0b0f14 0%, #0d1117 40%, #090c10 100%);
+  position: relative;
 }
 
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  animation: gridMove 60s linear infinite;
+}
+
+@keyframes gridMove {
+  from { transform: translate(0,0); }
+  to { transform: translate(-40px,-40px); }
+}
+
+/* ===== KONTAINER ===== */
 .container {
   width: 94%;
   max-width: 760px;
-  padding: 20px 16px 40px 16px;
+  padding: 25px 18px 60px 18px;
 }
 
 /* ===== PANEL CZASU ===== */
@@ -26,9 +50,10 @@ body {
   background: #161b22;
   border-radius: 14px;
   padding: 12px;
-  margin-bottom: 14px;
+  margin-bottom: 18px;
   text-align: center;
-  box-shadow: 0 0 20px rgba(0,255,136,0.05);
+  box-shadow: 0 0 20px rgba(0,255,136,0.07);
+  border: 1px solid rgba(0,255,136,0.15);
 }
 
 .clock {
@@ -40,46 +65,43 @@ body {
   font-size: 16px;
   font-weight: bold;
   color: #ff4d4d;
+  margin-top: 4px;
 }
 
-/* ===== LINKI ===== */
-.links-wrapper {
-  display: grid;
+/* ===== LINKI GÓRNE ===== */
+.links-row {
+  display: flex;
+  flex-direction: column;
   gap: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
-.link-box {
+.shadow-section {
   background: linear-gradient(145deg,#11161d,#0f141a);
-  border-radius: 14px;
   padding: 12px;
+  border-radius: 14px;
   text-align: center;
-  border: 1px solid rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
   transition: 0.3s ease;
 }
 
-.link-box a {
-  text-decoration: none;
-  color: #ffffff;
-  font-weight: bold;
+.shadow-section:hover {
+  border-color: rgba(255,255,255,0.25);
+}
+
+.shadow-section a {
   font-size: 15px;
+  font-weight: bold;
+  text-decoration: none;
   letter-spacing: 0.5px;
-}
-
-.link-box:hover {
-  background: #1a222c;
-  transform: translateY(-2px);
-}
-
-.link-box.highlight {
-  border: 1px solid rgba(255,0,0,0.4);
+  color: #ffffff;
 }
 
 /* ===== NAGŁÓWEK ===== */
 h2 {
   text-align: center;
   color: #00ff88;
-  margin: 30px 0 20px 0;
+  margin-bottom: 25px;
   font-weight: 500;
 }
 
@@ -88,64 +110,67 @@ h2 {
   width: 100%;
   max-width: 460px;
   display: block;
-  margin: 30px auto;
-  border-radius: 18px;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+  margin: 35px auto;
+  border-radius: 20px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.6);
 }
 
-/* ===== STORY ===== */
+/* ===== BLOK TEKSTU ===== */
 .story {
   background: linear-gradient(145deg,#161b22,#11161d);
-  padding: 30px 24px;
-  border-radius: 20px;
-  line-height: 1.9;
-  font-size: 16px;
-  border: 1px solid rgba(0,255,136,0.1);
+  padding: 40px 30px;
+  border-radius: 26px;
+  line-height: 2;
+  font-size: 17px;
+  box-shadow: 0 0 40px rgba(0,255,136,0.05);
+  border: 1px solid rgba(0,255,136,0.15);
 }
 
 .story p {
-  margin-bottom: 24px;
-  text-indent: 22px;
+  margin-bottom: 30px;
+  text-indent: 25px;
   text-align: justify;
   font-style: italic;
 }
 
 .story p strong {
   color: #ffffff;
-  font-weight: bold;
 }
 
 .story p:first-child::first-letter {
-  font-size: 42px;
+  font-size: 44px;
   font-weight: bold;
   float: left;
-  padding-right: 8px;
+  line-height: 1;
+  padding-right: 10px;
   color: #00ff88;
 }
 
-/* ===== ROZWIJANIE ===== */
+/* ===== ROZWIJANIE OPISU ===== */
 .more-text {
   display: none;
-  margin-top: 15px;
 }
 
-.read-more {
+.read-more-btn {
   display: block;
-  text-align: center;
-  margin-top: 15px;
+  margin: 25px auto 0 auto;
+  padding: 10px 18px;
+  background: #11161d;
+  border: 1px solid rgba(255,255,255,0.15);
+  color: #ffffff;
+  border-radius: 12px;
   cursor: pointer;
-  color: #00ff88;
-  font-weight: bold;
+  transition: 0.3s ease;
 }
 
-.read-more:hover {
-  opacity: 0.7;
+.read-more-btn:hover {
+  border-color: #00ff88;
 }
 
-/* RESPONSYWNOŚĆ */
 @media (max-width: 500px) {
   .story {
     font-size: 15px;
+    padding: 28px 20px;
   }
 }
 </style>
@@ -159,11 +184,19 @@ h2 {
   <div class="countdown" id="countdown"></div>
 </div>
 
-<div class="links-wrapper">
-  <div class="link-box"><a href="osoby.html">√📂Osoby Powiązane❗</a></div>
-  <div class="link-box highlight"><a href="pokoj.html">pokój_dowody,audio oraz video,Logi.txt</a></div>
-  <div class="link-box"><a href="aluzje.html">√🤬aluzje oraz pełne cytaty❗</a></div>
-  <div class="link-box"><a href="dowody.zip" download>🛡 ZABEZPIECZ DOWODY</a></div>
+<div class="links-row">
+  <div class="shadow-section">
+    <a href="osoby.html">√📂Osoby Powiązane❗</a>
+  </div>
+  <div class="shadow-section">
+    <a href="pokoj.html">pokój_dowody,audio oraz video,Logi.txt</a>
+  </div>
+  <div class="shadow-section">
+    <a href="aluzje.html">√🤬aluzje oraz pełne cytaty❗</a>
+  </div>
+  <div class="shadow-section">
+    <a href="dowody.zip" download>🛡 ZABEZPIECZ DOWODY</a>
+  </div>
 </div>
 
 <h2>Kim jest osoba opisana w materiale?</h2>
@@ -174,21 +207,19 @@ h2 {
 
 <p><strong>Nazywał się Jakub Pietrunko.</strong> W moich notatkach figuruje jako „truciciel” — człowiek, który nie musiał podnosić głosu ani brudzić rąk krwią, by zostawić po sobie ślad...</p>
 
-<div class="more-text" id="moreContent">
+<div class="more-text" id="moreText">
 
 <img src="jakubap2.png" class="story-image">
 
-<p><strong>Dziś wiem, że to nie był proceder wobec wszystkich.</strong> Sprawa dotyczyła wyłącznie mnie — Patryka Ł...</p>
+<p><strong>Dziś wiem, że to nie był proceder wobec wszystkich.</strong> Sprawa dotyczyła wyłącznie mnie — Patryka Ł. Inni kupowali i odchodzili. Ja byłem wyjątkiem.</p>
 
 <img src="jakubp3.png" class="story-image">
 
 <p><strong>Spotkanie, które dziś uznaję za przełomowe,</strong> miało miejsce między 16 a 20 grudnia 2025 roku...</p>
 
-<p>Zwykle oznaczało to drobną przysługę — papierosy, piwo ze stacji...</p>
-
 </div>
 
-<span class="read-more" onclick="toggleText()">▼ Rozwiń dalszą część</span>
+<button class="read-more-btn" onclick="toggleText()">Rozwiń dalszą część</button>
 
 </div>
 </div>
@@ -224,15 +255,14 @@ function updateCountdown() {
 }
 
 function toggleText() {
-  const content = document.getElementById("moreContent");
-  const button = document.querySelector(".read-more");
-
-  if (content.style.display === "block") {
-    content.style.display = "none";
-    button.innerText = "▼ Rozwiń dalszą część";
+  const moreText = document.getElementById("moreText");
+  const btn = document.querySelector(".read-more-btn");
+  if (moreText.style.display === "block") {
+    moreText.style.display = "none";
+    btn.innerText = "Rozwiń dalszą część";
   } else {
-    content.style.display = "block";
-    button.innerText = "▲ Zwiń";
+    moreText.style.display = "block";
+    btn.innerText = "Zwiń opis";
   }
 }
 
