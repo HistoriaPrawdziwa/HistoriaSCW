@@ -9,7 +9,7 @@
 body {
   margin: 0;
   font-family: 'Segoe UI', monospace;
-  background: #0b0f14;
+  background: #0d1117;
   color: #e6edf3;
   display: flex;
   justify-content: center;
@@ -18,17 +18,17 @@ body {
 .container {
   width: 94%;
   max-width: 760px;
-  padding: 25px 18px 50px 18px;
+  padding: 25px 18px 40px 18px;
 }
 
 /* PANEL CZASU */
 .time-panel {
-  background: #121821;
-  border-radius: 14px;
+  background: #161b22;
+  border-radius: 16px;
   padding: 14px;
-  margin-bottom: 18px;
+  margin-bottom: 15px;
   text-align: center;
-  border: 1px solid rgba(255,255,255,0.08);
+  border: 1px solid rgba(0,255,136,0.15);
 }
 
 .clock {
@@ -39,41 +39,38 @@ body {
 
 .countdown {
   font-size: 16px;
-  font-weight: 600;
+  font-weight: bold;
   color: #ff4d4d;
-  letter-spacing: 1px;
 }
 
-/* PANEL LINKÓW */
-.link-panel {
-  background: #11161d;
-  border-radius: 12px;
-  padding: 14px;
-  margin-bottom: 10px;
+/* LINKI */
+.links-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.link-box {
+  background: #161b22;
+  border-radius: 14px;
+  padding: 12px;
   text-align: center;
-  border: 1px solid rgba(255,255,255,0.06);
-  transition: 0.25s ease;
+  border: 1px solid rgba(255,255,255,0.08);
+  transition: 0.3s ease;
 }
 
-.link-panel:hover {
-  background: #161c24;
-}
-
-.link-panel a {
-  text-decoration: none;
+.link-box a {
   color: #ffffff;
+  text-decoration: none;
   font-weight: 600;
-  letter-spacing: 1px;
-  font-size: 14px;
+  letter-spacing: 0.5px;
+  font-size: 15px;
 }
 
-/* NAGŁÓWEK */
-h2 {
-  text-align: center;
-  color: #00ff88;
-  margin: 35px 0 20px 0;
-  font-weight: 500;
-  letter-spacing: 1px;
+.link-box:hover {
+  border: 1px solid rgba(0,255,136,0.4);
+  background: #1c222b;
 }
 
 /* ZDJĘCIA */
@@ -82,18 +79,18 @@ h2 {
   max-width: 460px;
   display: block;
   margin: 35px auto;
-  border-radius: 16px;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+  border-radius: 18px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.6);
 }
 
 /* BLOK TEKSTU */
 .story {
-  background: #11161d;
-  padding: 38px 30px;
-  border-radius: 18px;
+  background: #161b22;
+  padding: 40px 30px;
+  border-radius: 22px;
   line-height: 1.9;
   font-size: 16px;
-  border: 1px solid rgba(255,255,255,0.06);
+  border: 1px solid rgba(0,255,136,0.15);
 }
 
 .story p {
@@ -108,46 +105,54 @@ h2 {
   color: #ffffff;
 }
 
-.alias-tag {
-  display: inline-block;
-  margin-left: 6px;
-  padding: 3px 8px;
-  font-size: 11px;
-  letter-spacing: 1px;
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.15);
-  border-radius: 6px;
-  color: #cccccc;
+.story p:first-child::first-letter {
+  font-size: 42px;
+  font-weight: bold;
+  float: left;
+  line-height: 1;
+  padding-right: 10px;
+  color: #00ff88;
 }
 
-/* UKRYTA CZĘŚĆ */
-.hidden-part {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.7s ease;
+h2 {
+  text-align: center;
+  color: #00ff88;
+  margin-bottom: 25px;
+  font-weight: 500;
 }
 
-.hidden-part.open {
-  max-height: 2000px;
-}
-
-/* PRZYCISK */
-.toggle-btn {
+/* ROZWIŃ / ZWIŃ */
+.toggle-button {
   display: block;
-  margin: 35px auto;
-  background: none;
-  border: 1px solid rgba(255,255,255,0.2);
+  margin: 40px auto 10px auto;
+  padding: 10px 18px;
+  background: transparent;
   color: #ffffff;
-  padding: 10px 20px;
-  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 20px;
   cursor: pointer;
-  font-size: 13px;
-  letter-spacing: 1px;
   transition: 0.3s ease;
 }
 
-.toggle-btn:hover {
-  background: rgba(255,255,255,0.05);
+.toggle-button:hover {
+  border-color: #00ff88;
+  color: #00ff88;
+}
+
+.collapsed {
+  max-height: 300px;
+  overflow: hidden;
+  position: relative;
+}
+
+.collapsed::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: linear-gradient(to bottom, transparent, #161b22);
 }
 </style>
 </head>
@@ -155,55 +160,41 @@ h2 {
 <body>
 <div class="container">
 
+<!-- PANEL CZASU -->
 <div class="time-panel">
   <div class="clock" id="clock"></div>
   <div class="countdown" id="countdown"></div>
 </div>
 
-<div class="link-panel">
-  <a href="osoby.html">√📂Osoby Powiązane❗</a>
-</div>
-
-<div class="link-panel">
-  <a href="pokoj.html">pokój_dowody,audio oraz video,Logi.txt</a>
-</div>
-
-<div class="link-panel">
-  <a href="aluzje.html">√🤬aluzje oraz pełne cytaty❗</a>
-</div>
-
-<div class="link-panel">
-  <a href="dowody.zip" download>🛡 ZABEZPIECZ DOWODY</a>
+<!-- LINKI -->
+<div class="links-wrapper">
+  <div class="link-box"><a href="osoby.html">√📂 Osoby Powiązane</a></div>
+  <div class="link-box"><a href="pokoj.html">Pokój_Dowody / Audio / Video / Logi</a></div>
+  <div class="link-box"><a href="raport.html">📄 Raport Operacyjny</a></div>
+  <div class="link-box"><a href="aluzje.html">√🤬 Aluzje oraz pełne cytaty</a></div>
+  <div class="link-box"><a href="dowody.zip" download>🛡 Zabezpiecz dowody</a></div>
 </div>
 
 <h2>Kim jest osoba opisana w materiale?</h2>
 
-<div class="story">
-
-<p><strong>Nazywał się Jakub Pietrunko</strong>
-<span class="alias-tag">alias: Jakub ze Sycowa</span>.
-W moich notatkach figuruje jako „truciciel” — człowiek, który nie musiał podnosić głosu ani brudzić rąk krwią, by zostawić po sobie ślad.</p>
-
 <img src="jakubp.png" class="story-image">
 
-<p><strong>Dziś wiem, że to nie był proceder wobec wszystkich.</strong> Sprawa dotyczyła wyłącznie mnie — Patryka Ł.</p>
+<button class="toggle-button" onclick="toggleStory()">Rozwiń / Zwiń</button>
 
-<!-- PRZYCISK W POŁOWIE -->
-<button class="toggle-btn" onclick="toggleStory()" id="toggleBtn">
-OTWÓRZ DALSZĄ CZĘŚĆ
-</button>
+<div class="story collapsed" id="storyContent">
 
-<div class="hidden-part" id="hiddenContent">
+<p><strong>Nazywał się Jakub Pietrunko</strong> — w tej narracji funkcjonujący również prześmiewczo jako „Jakub ze Sycowa”. W notatkach prywatnych określany był mianem „truciciela”. Była to figura symboliczna — ktoś, kto nie potrzebował krzyku ani przemocy, by wywołać konsekwencje.</p>
 
 <img src="jakubap2.png" class="story-image">
 
-<p><strong>Muszę jednak doprecyzować jedną rzecz:</strong> dzień, w którym uruchomił znikające wiadomości, nastąpił znacznie wcześniej niż moment, gdy zacząłem analizować jego aluzje.</p>
+<p><strong>Relacja nie była przypadkowa.</strong> Kontakty następowały według powtarzalnego schematu. Spotkania ustalane były krótko i rzeczowo.</p>
 
 <img src="jakubp3.png" class="story-image">
 
-<p><strong>Spotkanie, które dziś uznaję za przełomowe,</strong> miało miejsce między 16 a 20 grudnia 2025 roku.</p>
+<p><strong>Punkt przełomowy</strong> nastąpił w połowie grudnia. Data pozostaje nieprecyzyjna, jednak kontekst sytuacyjny utrwalił się wyraźnie. Z perspektywy czasu wiele wcześniejszych sygnałów nabrało innego znaczenia.</p>
 
-</div>
+<p>Dalsze szczegóły zostały przeniesione do odrębnych sekcji serwisu.</p>
+
 </div>
 </div>
 
@@ -237,23 +228,14 @@ function updateCountdown() {
     seconds + " sek.";
 }
 
+function toggleStory() {
+  document.getElementById("storyContent").classList.toggle("collapsed");
+}
+
 setInterval(updateClock, 1000);
 setInterval(updateCountdown, 1000);
 updateClock();
 updateCountdown();
-
-function toggleStory() {
-  const content = document.getElementById("hiddenContent");
-  const btn = document.getElementById("toggleBtn");
-
-  content.classList.toggle("open");
-
-  if (content.classList.contains("open")) {
-    btn.innerText = "ZWIŃ DALSZĄ CZĘŚĆ";
-  } else {
-    btn.innerText = "OTWÓRZ DALSZĄ CZĘŚĆ";
-  }
-}
 </script>
 
 </body>
