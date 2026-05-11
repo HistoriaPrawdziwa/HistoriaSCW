@@ -116,6 +116,36 @@ h2 {
   font-weight: 500;
 }
 
+/* ROZWIJANIE */
+.hidden-part {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.8s ease, opacity 0.6s ease;
+  opacity: 0;
+}
+
+.hidden-part.show {
+  max-height: 2000px;
+  opacity: 1;
+}
+
+.read-more-btn {
+  display: block;
+  margin: 30px auto 0 auto;
+  padding: 12px 25px;
+  border-radius: 25px;
+  background: #00ff88;
+  color: #0d1117;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.read-more-btn:hover {
+  background: #00cc6a;
+}
+
 @media (max-width: 500px) {
   .story {
     font-size: 15px;
@@ -128,13 +158,11 @@ h2 {
 <body>
 <div class="container">
 
-<!-- PANEL CZASU -->
 <div class="time-panel">
   <div class="clock" id="clock"></div>
   <div class="countdown" id="countdown"></div>
 </div>
 
-<!-- LINKI -->
 <div class="shadow-section">
   <a href="osoby.html">√📂Osoby Powiązane❗</a>
 </div>
@@ -157,20 +185,27 @@ h2 {
 
 <div class="story">
 
-<p><strong>Nazywał się Jakub Pietrunko.</strong> W moich notatkach figuruje jako „truciciel” — człowiek, który nie musiał podnosić głosu ani brudzić rąk krwią, by zostawić po sobie ślad. Dosypywał do porcji, które sprzedawał, coś więcej niż tylko towar. A ja, jako stały klient i nieświadomy narrator tej historii, długo nie rozumiałem, że w każdej działce była ukryta druga, cicha intencja.</p>
+<p><strong>Nazywał się Jakub Pietrunko.</strong> W moich notatkach figuruje jako „truciciel” — człowiek, który nie musiał podnosić głosu ani brudzić rąk krwią, by zostawić po sobie ślad...</p>
 
 <img src="jakubap2.png" class="story-image">
 
-<p><strong>Dziś wiem, że to nie był proceder wobec wszystkich.</strong> Sprawa dotyczyła wyłącznie mnie — Patryka Ł. Inni kupowali i odchodzili. Ja byłem wyjątkiem.</p>
+<p><strong>Dziś wiem, że to nie był proceder wobec wszystkich.</strong> Sprawa dotyczyła wyłącznie mnie — Patryka Ł...</p>
 
-<p><strong>Muszę jednak doprecyzować jedną rzecz:</strong> dzień, w którym uruchomił znikające wiadomości na Messengerze, nastąpił znacznie wcześniej niż ten, w którym zacząłem analizować jego dziwne aluzje i łączyć fakty. Wtedy nie zwróciłem na to większej uwagi. Ot, kolejna ostrożność w branży. Dopiero z perspektywy czasu zrozumiałem, że to był pierwszy sygnał.</p>
+<button class="read-more-btn" onclick="toggleStory()" id="toggleBtn">
+Czytaj dalszą część
+</button>
+
+<div class="hidden-part" id="hiddenPart">
 
 <img src="jakubp3.png" class="story-image">
 
-<p><strong>Spotkanie, które dziś uznaję za przełomowe,</strong> miało miejsce między 16 a 20 grudnia 2025 roku — nie pamiętam dokładnej daty, ale jestem pewien, że był to któryś z tych dni. Pamiętam za to śnieg. Ciężki, mokry, tłumiący dźwięki miasta. Siedziałem w domu, gdy napisał, bym pilnie do niego podbił, bo ma sprawę.</p>
+<p><strong>Muszę jednak doprecyzować jedną rzecz:</strong> dzień, w którym uruchomił znikające wiadomości...</p>
 
-<p>Zwykle oznaczało to drobną przysługę — papierosy, piwo ze stacji, coś w tym stylu. W zamian porcja amfetaminy. Tym razem ton był inny. Krótszy. Bardziej napięty. Umówiliśmy się w połowie drogi do jego „bazy”, czyli garażu przy domu. Nie wiedziałem jeszcze, że idę nie po zwykłą działkę, lecz po początek historii, którą dopiero później zacznę składać w całość.</p>
+<p><strong>Spotkanie, które dziś uznaję za przełomowe,</strong> miało miejsce między 16 a 20 grudnia 2025 roku...</p>
 
+<p>Nie wiedziałem jeszcze, że idę nie po zwykłą działkę, lecz po początek historii, którą dopiero później zacznę składać w całość.</p>
+
+</div>
 </div>
 </div>
 
@@ -202,6 +237,19 @@ function updateCountdown() {
     hours + " godz., " +
     minutes + " min., " +
     seconds + " sek.";
+}
+
+function toggleStory() {
+  const hidden = document.getElementById("hiddenPart");
+  const btn = document.getElementById("toggleBtn");
+
+  hidden.classList.toggle("show");
+
+  if (hidden.classList.contains("show")) {
+    btn.innerText = "Zwiń historię";
+  } else {
+    btn.innerText = "Czytaj dalszą część";
+  }
 }
 
 setInterval(updateClock, 1000);
