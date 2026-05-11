@@ -135,7 +135,8 @@ h2 {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.9);
+  background: rgba(0,0,0,0.92);
+  backdrop-filter: blur(6px);
   justify-content: center;
   align-items: center;
   z-index: 999;
@@ -151,6 +152,15 @@ h2 {
   border: 1px solid rgba(255,255,255,0.1);
 }
 
+.gate-box h3 {
+  letter-spacing: 2px;
+}
+
+.gate-box p {
+  font-size: 13px;
+  color: #8b949e;
+}
+
 .gate-box input {
   width: 100%;
   padding: 10px;
@@ -159,6 +169,7 @@ h2 {
   border: none;
   background: #0d1117;
   color: #ffffff;
+  text-align: center;
 }
 
 .gate-box button {
@@ -168,11 +179,18 @@ h2 {
   border: 1px solid rgba(255,255,255,0.2);
   border-radius: 20px;
   cursor: pointer;
+  transition: 0.3s;
+}
+
+.gate-box button:hover {
+  border-color: #00ff88;
+  color: #00ff88;
 }
 
 #errorMsg {
   color: #ff4d4d;
   font-size: 13px;
+  min-height: 18px;
 }
 </style>
 </head>
@@ -199,7 +217,7 @@ h2 {
 
 <div class="story">
 
-<p><strong>Nazywał się Jakub Pietrunko</strong>, znany prześmiewczo jako „Jakub ze Sycowa”. W moich notatkach figuruje jako „truciciel” — człowiek, który nie musiał podnosić głosu ani brudzić rąk krwią, by zostawić po sobie ślad.</p>
+<p><strong>Nazywał się Jakub Pietrunko</strong>, znany prześmiewczo jako „Jakub ze Sycowa”. W notatkach figuruje jako „truciciel”.</p>
 
 <button class="toggle-btn" onclick="toggleStory()">Rozwiń dalszą część</button>
 
@@ -207,11 +225,11 @@ h2 {
 
 <img src="jakubap2.png" class="story-image">
 
-<p><strong>Dziś wiem, że to nie był proceder wobec wszystkich.</strong> Sprawa dotyczyła wyłącznie mnie — Patryka Ł. Inni kupowali i odchodzili. Ja byłem wyjątkiem.</p>
+<p><strong>Dziś wiem, że to nie był proceder wobec wszystkich.</strong> Sprawa dotyczyła wyłącznie mnie.</p>
 
 <img src="jakubp3.png" class="story-image">
 
-<p><strong>Spotkanie przełomowe</strong> miało miejsce między 16 a 20 grudnia 2025 roku. Śnieg tłumił dźwięki miasta. Ton wiadomości był inny. Bardziej napięty.</p>
+<p><strong>Spotkanie przełomowe</strong> miało miejsce między 16 a 20 grudnia 2025 roku.</p>
 
 </div>
 </div>
@@ -221,8 +239,8 @@ h2 {
 <!-- MODAL -->
 <div id="accessGate" class="gate">
   <div class="gate-box">
-    <h3>DOSTĘP OGRANICZONY</h3>
-    <p style="font-size:13px;color:#8b949e;">Podpowiedź: Imię i nazwisko „truciciela”</p>
+    <h3>DANE ZABEZPIECZONE</h3>
+    <p>Wprowadź widoczne hasło zapisane wspak.<br>Wskazówka: <strong>12345</strong></p>
     <input type="password" id="passwordInput" placeholder="Wprowadź hasło">
     <button onclick="checkPassword()">Odblokuj</button>
     <p id="errorMsg"></p>
@@ -258,26 +276,32 @@ setInterval(updateCountdown, 1000);
 updateClock();
 updateCountdown();
 
-/* ROZWIŃ */
 function toggleStory() {
   const section = document.getElementById("moreStory");
   section.style.display = section.style.display === "block" ? "none" : "block";
 }
 
-/* GATE */
 function openGate(e) {
   e.preventDefault();
   document.getElementById("accessGate").style.display = "flex";
+  document.getElementById("passwordInput").value = "";
+  document.getElementById("errorMsg").innerText = "";
 }
 
 function checkPassword() {
   const input = document.getElementById("passwordInput").value.trim();
-  if (input === "jakubpietrunko") {
+  if (input === "54321") {
     window.location.href = "raport.html";
   } else {
     document.getElementById("errorMsg").innerText = "Błędne hasło.";
   }
 }
+
+document.getElementById("passwordInput").addEventListener("keydown", function(e){
+  if(e.key === "Enter"){
+    checkPassword();
+  }
+});
 
 document.getElementById("accessGate").addEventListener("click", function(e){
   if(e.target === this){
