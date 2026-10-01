@@ -121,17 +121,25 @@
       font-size: 12px;
       letter-spacing: 1.5px;
       text-transform: uppercase;
-      margin-bottom: 28px;
+      margin-bottom: 24px;
       color: var(--text-dim);
     }
     .status .red { color: var(--red); font-weight: 600; }
+
+    .countdown-label {
+      font-size: 12px;
+      color: var(--text-dim);
+      margin-bottom: 12px;
+      letter-spacing: 0.5px;
+      font-family: 'JetBrains Mono', monospace;
+    }
 
     /* KOŁO */
     .wheel-section {
       position: relative;
       width: 300px;
       height: 300px;
-      margin: 0 auto 28px;
+      margin: 0 auto 20px;
     }
     .wheel-svg {
       width: 100%;
@@ -163,64 +171,66 @@
     }
     .hub { fill: var(--green); }
 
-    /* TEKST SZYFRU NA OBRĘCZY */
-    .cipher-text {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      pointer-events: none;
-    }
+    /* LITERY W BIAŁYCH KWADRACIKACH NA OBRĘCZY */
     .cipher-chars {
       position: absolute;
-      width: 100%;
-      height: 100%;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--green);
-      text-shadow: 0 0 8px rgba(0, 255, 157, 0.6);
+      inset: 0;
+      pointer-events: none;
     }
     .cipher-char {
       position: absolute;
       left: 50%;
       top: 50%;
-      width: 16px;
-      height: 16px;
-      margin-left: -8px;
-      margin-top: -8px;
+      width: 22px;
+      height: 22px;
+      margin-left: -11px;
+      margin-top: -11px;
+      background: #fff;
+      color: #000;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 600;
       display: flex;
       align-items: center;
       justify-content: center;
-      opacity: 0.15;
-      transition: opacity 0.25s ease, color 0.25s ease, text-shadow 0.25s ease;
+      border-radius: 3px;
+      opacity: 0;
+      transform-origin: center;
+      transition: opacity 0.35s ease;
+      box-shadow: 0 0 8px rgba(255,255,255,0.3);
     }
-    .cipher-char.blink {
+    .cipher-char.visible {
       opacity: 1;
-      color: #fff;
-      text-shadow: 0 0 12px #00ff9d, 0 0 20px #00ff9d;
     }
-    .cipher-char.revealed {
-      opacity: 0.95;
-      color: var(--green);
-      text-shadow: 0 0 10px rgba(0, 255, 157, 0.7);
+    .cipher-char.fading {
+      opacity: 0.15;
     }
 
-    .countdown-label {
-      font-size: 12px;
-      color: var(--text-dim);
-      margin-bottom: 12px;
-      letter-spacing: 0.5px;
+    /* HASŁO POD LICZNIKIEM */
+    .final-phrase {
       font-family: 'JetBrains Mono', monospace;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--green);
+      letter-spacing: 1.5px;
+      min-height: 28px;
+      margin: 8px 0 28px;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+      text-shadow: 0 0 10px rgba(0, 255, 157, 0.4);
+    }
+    .final-phrase.show {
+      opacity: 1;
+      transform: translateY(0);
     }
 
-    /* Licznik pod kołem */
+    /* LICZNIK */
     .time-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 8px;
-      margin-bottom: 32px;
+      margin-bottom: 6px;
       font-family: 'JetBrains Mono', monospace;
     }
     .time-block { text-align: center; }
@@ -292,7 +302,8 @@
     @media (max-width: 480px) {
       .wheel-section { width: 260px; height: 260px; }
       .time-value { font-size: 18px; }
-      .cipher-chars { font-size: 11px; }
+      .cipher-char { width: 19px; height: 19px; margin-left: -9.5px; margin-top: -9.5px; font-size: 11px; }
+      .final-phrase { font-size: 13px; }
       .message h1 { font-size: 18px; }
     }
   </style>
@@ -340,7 +351,7 @@
 
       <div class="countdown-label">Dostęp zostanie odblokowany za</div>
 
-      <!-- KOŁO + SZYFR -->
+      <!-- KOŁO -->
       <div class="wheel-section">
         <svg class="wheel-svg" viewBox="0 0 300 300">
           <circle class="wheel-rim" cx="150" cy="150" r="138"/>
@@ -364,13 +375,10 @@
           <circle cx="150" cy="150" r="3.5" fill="#050505"/>
         </svg>
 
-        <!-- Znaki szyfru rozmieszczone równomiernie na okręgu -->
-        <div class="cipher-text">
-          <div class="cipher-chars" id="cipherChars"></div>
-        </div>
+        <div class="cipher-chars" id="cipherChars"></div>
       </div>
 
-      <!-- Licznik -->
+      <!-- LICZNIK -->
       <div class="time-grid">
         <div class="time-block">
           <div class="time-value" id="days">--</div>
@@ -390,6 +398,9 @@
         </div>
       </div>
 
+      <!-- HASŁO PO ODSZYFROWANIU -->
+      <div class="final-phrase" id="finalPhrase"></div>
+
       <div class="message">
         <h1>Dalsza część strony jest obecnie niedostępna</h1>
         <p>
@@ -408,7 +419,7 @@
   </div>
 
   <script>
-    // ===== LOADER =====
+    // LOADER
     const progressEl = document.getElementById('progress');
     const loader = document.getElementById('loader');
     const content = document.getElementById('content');
@@ -433,7 +444,7 @@
       }
     }, interval);
 
-    // ===== COUNTDOWN =====
+    // COUNTDOWN
     const endDate = new Date('2026-12-30T00:00:00+02:00').getTime();
     function updateCountdown() {
       const now = new Date().getTime();
@@ -450,22 +461,20 @@
     updateCountdown();
     setInterval(updateCountdown, 1000);
 
-    // ===== SZYFR – Easter egg =====
+    // SZYFR
     const FINAL_TEXT = "JAK KUBA BOGU TAK BÓG KUBIE";
-    const CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    const RADIUS = 118; // odległość od środka
+    const RADIUS = 118;
 
     function startCipher() {
       const container = document.getElementById('cipherChars');
       const letters = FINAL_TEXT.split('');
       const total = letters.length;
 
-      // Tworzymy elementy równomiernie na okręgu
+      // Tworzymy kwadraciki równomiernie na okręgu
       letters.forEach((char, i) => {
         const el = document.createElement('div');
         el.className = 'cipher-char';
-        el.textContent = char === ' ' ? '•' : CHARS[Math.floor(Math.random() * CHARS.length)];
-        el.dataset.final = char === ' ' ? '•' : char;
+        el.textContent = char === ' ' ? '·' : char;
 
         const angle = (i / total) * Math.PI * 2 - Math.PI / 2;
         const x = Math.cos(angle) * RADIUS;
@@ -475,40 +484,46 @@
         container.appendChild(el);
       });
 
-      const allChars = container.querySelectorAll('.cipher-char');
+      const allChars = Array.from(container.querySelectorAll('.cipher-char'));
 
-      // Faza 1: losowe mruganie przez \~4 sekundy
-      let blinkCount = 0;
-      const blinkInterval = setInterval(() => {
-        allChars.forEach(el => {
-          if (Math.random() > 0.7) {
-            el.classList.add('blink');
-            el.textContent = CHARS[Math.floor(Math.random() * CHARS.length)];
-            setTimeout(() => el.classList.remove('blink'), 180);
-          }
-        });
-        blinkCount++;
-        if (blinkCount > 22) {
-          clearInterval(blinkInterval);
-          decrypt();
+      // Pokazywanie liter po kolei z opóźnionym zanikaniem poprzedniej
+      let current = 0;
+
+      function showNext() {
+        if (current >= allChars.length) {
+          // Wszystkie pokazane – płynne przejście hasła pod licznik
+          setTimeout(() => {
+            // Ukrywamy kwadraciki
+            allChars.forEach(el => {
+              el.style.transition = 'opacity 0.6s ease';
+              el.style.opacity = '0';
+            });
+
+            // Pokazujemy pełne hasło pod licznikiem
+            const phrase = document.getElementById('finalPhrase');
+            phrase.textContent = FINAL_TEXT;
+            phrase.classList.add('show');
+          }, 900);
+          return;
         }
-      }, 160);
 
-      // Faza 2: odszyfrowanie po kolei
-      function decrypt() {
-        let i = 0;
-        const decryptInterval = setInterval(() => {
-          if (i >= allChars.length) {
-            clearInterval(decryptInterval);
-            return;
-          }
-          const el = allChars[i];
-          el.textContent = el.dataset.final;
-          el.classList.add('revealed');
-          el.classList.remove('blink');
-          i++;
-        }, 90);
+        const el = allChars[current];
+        el.classList.add('visible');
+
+        // Poprzednia litera zaczyna zanikać z opóźnieniem
+        if (current > 0) {
+          const prev = allChars[current - 1];
+          setTimeout(() => {
+            prev.classList.add('fading');
+          }, 380); // opóźnienie zaniku – trzeba śledzić
+        }
+
+        current++;
+        setTimeout(showNext, 520); // odstęp między literami
       }
+
+      // Start po krótkim opóźnieniu
+      setTimeout(showNext, 600);
     }
   </script>
 </body>
