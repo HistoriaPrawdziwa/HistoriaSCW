@@ -18,11 +18,7 @@
       --text-dim: #777;
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       background: var(--bg);
@@ -32,7 +28,7 @@
       overflow-x: hidden;
     }
 
-    /* ========== LOADER ========== */
+    /* LOADER */
     #loader {
       position: fixed;
       inset: 0;
@@ -44,25 +40,13 @@
       z-index: 9999;
       transition: opacity 0.8s ease, visibility 0.8s ease;
     }
-
     #loader.hide {
       opacity: 0;
       visibility: hidden;
       pointer-events: none;
     }
-
-    .bike-container {
-      width: 280px;
-      height: 180px;
-      position: relative;
-    }
-
-    .bike-container svg {
-      width: 100%;
-      height: 100%;
-      overflow: visible;
-    }
-
+    .bike-container { width: 280px; height: 180px; }
+    .bike-container svg { width: 100%; height: 100%; overflow: visible; }
     .part {
       fill: none;
       stroke: var(--green);
@@ -72,7 +56,6 @@
       opacity: 0;
       filter: drop-shadow(0 0 4px rgba(0, 255, 157, 0.4));
     }
-
     .part-1 { animation: appear 0.4s 0.2s forwards; }
     .part-2 { animation: appear 0.4s 0.6s forwards; }
     .part-3 { animation: appear 0.4s 1.0s forwards; }
@@ -81,23 +64,17 @@
     .part-6 { animation: appear 0.4s 2.2s forwards; }
     .part-7 { animation: appear 0.4s 2.6s forwards; }
     .part-8 { animation: appear 0.4s 3.0s forwards; }
-
-    @keyframes appear {
-      to { opacity: 1; }
-    }
-
+    @keyframes appear { to { opacity: 1; } }
     .screw {
       fill: var(--green);
       opacity: 0;
       animation: screwAppear 0.5s 0.1s forwards;
     }
-
     @keyframes screwAppear {
       0% { opacity: 0; transform: scale(0); }
       60% { opacity: 1; transform: scale(1.3); }
       100% { opacity: 1; transform: scale(1); }
     }
-
     .progress-text {
       margin-top: 32px;
       font-family: 'JetBrains Mono', monospace;
@@ -106,7 +83,6 @@
       letter-spacing: 3px;
       text-shadow: 0 0 10px rgba(0, 255, 157, 0.5);
     }
-
     .loading-label {
       margin-top: 10px;
       font-size: 12px;
@@ -116,7 +92,7 @@
       font-family: 'JetBrains Mono', monospace;
     }
 
-    /* ========== GŁÓWNA TREŚĆ ========== */
+    /* CONTENT */
     #content {
       opacity: 0;
       transform: translateY(20px);
@@ -131,18 +107,15 @@
         radial-gradient(ellipse at top, #0d1a14 0%, transparent 55%),
         radial-gradient(ellipse at bottom, #111 0%, transparent 50%);
     }
-
     #content.show {
       opacity: 1;
       transform: translateY(0);
     }
-
     .container {
       width: 100%;
       max-width: 480px;
       text-align: center;
     }
-
     .status {
       font-family: 'JetBrains Mono', monospace;
       font-size: 12px;
@@ -151,90 +124,112 @@
       margin-bottom: 28px;
       color: var(--text-dim);
     }
+    .status .red { color: var(--red); font-weight: 600; }
 
-    .status .red {
-      color: var(--red);
-      font-weight: 600;
-    }
-
-    /* ===== KOŁO Z LICZNIKIEM ===== */
+    /* KOŁO */
     .wheel-section {
       position: relative;
-      width: 280px;
-      height: 280px;
-      margin: 0 auto 36px;
+      width: 300px;
+      height: 300px;
+      margin: 0 auto 28px;
     }
-
     .wheel-svg {
       width: 100%;
       height: 100%;
       filter: drop-shadow(0 0 12px rgba(0, 255, 157, 0.25));
     }
-
     .wheel-rim {
       fill: none;
       stroke: var(--green);
       stroke-width: 2.5;
     }
-
     .wheel-inner {
       fill: none;
       stroke: var(--green);
       stroke-width: 1.2;
-      opacity: 0.5;
+      opacity: 0.45;
     }
-
     .spoke {
       stroke: var(--green);
-      stroke-width: 1.2;
-      opacity: 0.7;
-      transform-origin: 140px 140px;
-      animation: spin 12s linear infinite;
+      stroke-width: 1.1;
+      opacity: 0.55;
+      transform-origin: 150px 150px;
+      animation: spin 14s linear infinite;
     }
-
-    .spoke:nth-child(odd) {
-      animation-duration: 18s;
-      opacity: 0.4;
-    }
-
+    .spoke:nth-child(odd) { animation-duration: 20s; opacity: 0.35; }
     @keyframes spin {
       from { transform: rotate(0deg); }
       to { transform: rotate(360deg); }
     }
+    .hub { fill: var(--green); }
 
-    .hub {
-      fill: var(--green);
-    }
-
-    .countdown-center {
+    /* TEKST SZYFRU NA OBRĘCZY */
+    .cipher-text {
       position: absolute;
       inset: 0;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
       pointer-events: none;
     }
-
-    .time-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6px 18px;
-      text-align: center;
+    .cipher-chars {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--green);
+      text-shadow: 0 0 8px rgba(0, 255, 157, 0.6);
+    }
+    .cipher-char {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 16px;
+      height: 16px;
+      margin-left: -8px;
+      margin-top: -8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.15;
+      transition: opacity 0.25s ease, color 0.25s ease, text-shadow 0.25s ease;
+    }
+    .cipher-char.blink {
+      opacity: 1;
+      color: #fff;
+      text-shadow: 0 0 12px #00ff9d, 0 0 20px #00ff9d;
+    }
+    .cipher-char.revealed {
+      opacity: 0.95;
+      color: var(--green);
+      text-shadow: 0 0 10px rgba(0, 255, 157, 0.7);
     }
 
-    .time-block {
+    .countdown-label {
+      font-size: 12px;
+      color: var(--text-dim);
+      margin-bottom: 12px;
+      letter-spacing: 0.5px;
       font-family: 'JetBrains Mono', monospace;
     }
 
+    /* Licznik pod kołem */
+    .time-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-bottom: 32px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .time-block { text-align: center; }
     .time-value {
-      font-size: 26px;
+      font-size: 22px;
       font-weight: 600;
       color: var(--green);
-      line-height: 1.1;
-      text-shadow: 0 0 10px rgba(0, 255, 157, 0.5);
+      text-shadow: 0 0 8px rgba(0, 255, 157, 0.4);
     }
-
     .time-label {
       font-size: 10px;
       color: var(--text-dim);
@@ -243,29 +238,15 @@
       margin-top: 2px;
     }
 
-    .countdown-label {
-      font-size: 12px;
-      color: var(--text-dim);
-      margin-bottom: 18px;
-      letter-spacing: 0.5px;
-      font-family: 'JetBrains Mono', monospace;
-    }
-
-    /* Reszta */
-    .message {
-      margin-bottom: 36px;
-    }
-
+    .message { margin-bottom: 32px; }
     .message h1 {
-      font-size: 21px;
+      font-size: 20px;
       font-weight: 600;
       margin-bottom: 12px;
       color: #fff;
-      letter-spacing: -0.3px;
     }
-
     .message p {
-      font-size: 15px;
+      font-size: 14px;
       color: var(--text-dim);
       line-height: 1.55;
       max-width: 360px;
@@ -276,35 +257,31 @@
       display: flex;
       flex-direction: column;
       gap: 12px;
-      margin-bottom: 36px;
+      margin-bottom: 32px;
     }
-
     .link-btn {
       display: block;
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 10px;
-      padding: 16px 20px;
+      padding: 15px 20px;
       color: var(--text);
       text-decoration: none;
       font-size: 14px;
       font-weight: 500;
       transition: all 0.2s ease;
     }
-
     .link-btn:hover {
       border-color: var(--green-dim);
       background: #151515;
       color: var(--green);
     }
-
     .link-btn span {
       font-family: 'JetBrains Mono', monospace;
       font-size: 12px;
       color: var(--text-dim);
       margin-left: 8px;
     }
-
     .footer {
       font-size: 12px;
       color: #444;
@@ -313,20 +290,10 @@
     }
 
     @media (max-width: 480px) {
-      .wheel-section {
-        width: 240px;
-        height: 240px;
-      }
-      .time-value {
-        font-size: 22px;
-      }
-      .message h1 {
-        font-size: 19px;
-      }
-      .bike-container {
-        width: 240px;
-        height: 155px;
-      }
+      .wheel-section { width: 260px; height: 260px; }
+      .time-value { font-size: 18px; }
+      .cipher-chars { font-size: 11px; }
+      .message h1 { font-size: 18px; }
     }
   </style>
 </head>
@@ -338,17 +305,14 @@
       <svg viewBox="0 0 280 180" fill="none">
         <circle class="screw" cx="140" cy="95" r="5"/>
         <circle class="screw" cx="140" cy="95" r="2.2" fill="#050505" stroke="none"/>
-
         <circle class="part part-1" cx="70" cy="120" r="38"/>
         <circle class="part part-1" cx="70" cy="120" r="6"/>
         <line class="part part-1" x1="70" y1="82" x2="70" y2="158"/>
         <line class="part part-1" x1="32" y1="120" x2="108" y2="120"/>
-
         <circle class="part part-2" cx="210" cy="120" r="38"/>
         <circle class="part part-2" cx="210" cy="120" r="6"/>
         <line class="part part-2" x1="210" y1="82" x2="210" y2="158"/>
         <line class="part part-2" x1="172" y1="120" x2="248" y2="120"/>
-
         <path class="part part-3" d="M70 120 L140 95 L210 120"/>
         <path class="part part-4" d="M95 85 L140 60 L185 85"/>
         <path class="part part-4" d="M140 60 L140 95"/>
@@ -367,7 +331,7 @@
     <div class="loading-label">Inicjalizacja systemu</div>
   </div>
 
-  <!-- GŁÓWNA TREŚĆ -->
+  <!-- CONTENT -->
   <div id="content">
     <div class="container">
       <div class="status">
@@ -376,56 +340,53 @@
 
       <div class="countdown-label">Dostęp zostanie odblokowany za</div>
 
-      <!-- KOŁO Z LICZNIKIEM -->
+      <!-- KOŁO + SZYFR -->
       <div class="wheel-section">
-        <svg class="wheel-svg" viewBox="0 0 280 280">
-          <!-- Zewnętrzna obręcz -->
-          <circle class="wheel-rim" cx="140" cy="140" r="128"/>
-          <!-- Wewnętrzna obręcz -->
-          <circle class="wheel-inner" cx="140" cy="140" r="118"/>
-          <circle class="wheel-inner" cx="140" cy="140" r="30"/>
-
-          <!-- Szprychy (obracające się) -->
+        <svg class="wheel-svg" viewBox="0 0 300 300">
+          <circle class="wheel-rim" cx="150" cy="150" r="138"/>
+          <circle class="wheel-inner" cx="150" cy="150" r="126"/>
+          <circle class="wheel-inner" cx="150" cy="150" r="32"/>
           <g>
-            <line class="spoke" x1="140" y1="140" x2="140" y2="18"/>
-            <line class="spoke" x1="140" y1="140" x2="140" y2="262"/>
-            <line class="spoke" x1="140" y1="140" x2="18" y2="140"/>
-            <line class="spoke" x1="140" y1="140" x2="262" y2="140"/>
-            <line class="spoke" x1="140" y1="140" x2="52" y2="52"/>
-            <line class="spoke" x1="140" y1="140" x2="228" y2="228"/>
-            <line class="spoke" x1="140" y1="140" x2="228" y2="52"/>
-            <line class="spoke" x1="140" y1="140" x2="52" y2="228"/>
-            <line class="spoke" x1="140" y1="140" x2="75" y2="25"/>
-            <line class="spoke" x1="140" y1="140" x2="205" y2="255"/>
-            <line class="spoke" x1="140" y1="140" x2="255" y2="75"/>
-            <line class="spoke" x1="140" y1="140" x2="25" y2="205"/>
+            <line class="spoke" x1="150" y1="150" x2="150" y2="18"/>
+            <line class="spoke" x1="150" y1="150" x2="150" y2="282"/>
+            <line class="spoke" x1="150" y1="150" x2="18" y2="150"/>
+            <line class="spoke" x1="150" y1="150" x2="282" y2="150"/>
+            <line class="spoke" x1="150" y1="150" x2="55" y2="55"/>
+            <line class="spoke" x1="150" y1="150" x2="245" y2="245"/>
+            <line class="spoke" x1="150" y1="150" x2="245" y2="55"/>
+            <line class="spoke" x1="150" y1="150" x2="55" y2="245"/>
+            <line class="spoke" x1="150" y1="150" x2="80" y2="28"/>
+            <line class="spoke" x1="150" y1="150" x2="220" y2="272"/>
+            <line class="spoke" x1="150" y1="150" x2="272" y2="80"/>
+            <line class="spoke" x1="150" y1="150" x2="28" y2="220"/>
           </g>
-
-          <!-- Piasta -->
-          <circle class="hub" cx="140" cy="140" r="8"/>
-          <circle cx="140" cy="140" r="3.5" fill="#050505"/>
+          <circle class="hub" cx="150" cy="150" r="8"/>
+          <circle cx="150" cy="150" r="3.5" fill="#050505"/>
         </svg>
 
-        <!-- Licznik na środku koła -->
-        <div class="countdown-center">
-          <div class="time-grid">
-            <div class="time-block">
-              <div class="time-value" id="days">--</div>
-              <div class="time-label">dni</div>
-            </div>
-            <div class="time-block">
-              <div class="time-value" id="hours">--</div>
-              <div class="time-label">godz</div>
-            </div>
-            <div class="time-block">
-              <div class="time-value" id="minutes">--</div>
-              <div class="time-label">min</div>
-            </div>
-            <div class="time-block">
-              <div class="time-value" id="seconds">--</div>
-              <div class="time-label">sek</div>
-            </div>
-          </div>
+        <!-- Znaki szyfru rozmieszczone równomiernie na okręgu -->
+        <div class="cipher-text">
+          <div class="cipher-chars" id="cipherChars"></div>
+        </div>
+      </div>
+
+      <!-- Licznik -->
+      <div class="time-grid">
+        <div class="time-block">
+          <div class="time-value" id="days">--</div>
+          <div class="time-label">dni</div>
+        </div>
+        <div class="time-block">
+          <div class="time-value" id="hours">--</div>
+          <div class="time-label">godz</div>
+        </div>
+        <div class="time-block">
+          <div class="time-value" id="minutes">--</div>
+          <div class="time-label">min</div>
+        </div>
+        <div class="time-block">
+          <div class="time-value" id="seconds">--</div>
+          <div class="time-label">sek</div>
         </div>
       </div>
 
@@ -438,31 +399,23 @@
       </div>
 
       <div class="links">
-        <a href="#" class="link-btn">
-          Test 1 <span>// tymczasowy</span>
-        </a>
-        <a href="#" class="link-btn">
-          Test 2 <span>// tymczasowy</span>
-        </a>
+        <a href="#" class="link-btn">Test 1 <span>// tymczasowy</span></a>
+        <a href="#" class="link-btn">Test 2 <span>// tymczasowy</span></a>
       </div>
 
-      <div class="footer">
-        SYSTEM • DOSTĘP OGRANICZONY
-      </div>
+      <div class="footer">SYSTEM • DOSTĘP OGRANICZONY</div>
     </div>
   </div>
 
   <script>
-    // Loader progress
+    // ===== LOADER =====
     const progressEl = document.getElementById('progress');
     const loader = document.getElementById('loader');
     const content = document.getElementById('content');
-
     let progress = 0;
     const duration = 3400;
     const interval = 30;
-    const steps = duration / interval;
-    const increment = 100 / steps;
+    const increment = 100 / (duration / interval);
 
     const progressTimer = setInterval(() => {
       progress += increment;
@@ -473,40 +426,90 @@
         setTimeout(() => {
           loader.classList.add('hide');
           content.classList.add('show');
+          startCipher();
         }, 400);
       } else {
         progressEl.textContent = Math.floor(progress) + '%';
       }
     }, interval);
 
-    // Countdown
+    // ===== COUNTDOWN =====
     const endDate = new Date('2026-12-30T00:00:00+02:00').getTime();
-
     function updateCountdown() {
       const now = new Date().getTime();
       const distance = endDate - now;
-
       if (distance <= 0) {
-        document.getElementById('days').textContent = '00';
-        document.getElementById('hours').textContent = '00';
-        document.getElementById('minutes').textContent = '00';
-        document.getElementById('seconds').textContent = '00';
+        ['days','hours','minutes','seconds'].forEach(id => document.getElementById(id).textContent = '00');
         return;
       }
-
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      document.getElementById('days').textContent = String(days).padStart(2, '0');
-      document.getElementById('hours').textContent = String(hours).padStart(2, '0');
-      document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
-      document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+      document.getElementById('days').textContent = String(Math.floor(distance / 86400000)).padStart(2,'0');
+      document.getElementById('hours').textContent = String(Math.floor((distance % 86400000) / 3600000)).padStart(2,'0');
+      document.getElementById('minutes').textContent = String(Math.floor((distance % 3600000) / 60000)).padStart(2,'0');
+      document.getElementById('seconds').textContent = String(Math.floor((distance % 60000) / 1000)).padStart(2,'0');
     }
-
     updateCountdown();
     setInterval(updateCountdown, 1000);
+
+    // ===== SZYFR – Easter egg =====
+    const FINAL_TEXT = "JAK KUBA BOGU TAK BÓG KUBIE";
+    const CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    const RADIUS = 118; // odległość od środka
+
+    function startCipher() {
+      const container = document.getElementById('cipherChars');
+      const letters = FINAL_TEXT.split('');
+      const total = letters.length;
+
+      // Tworzymy elementy równomiernie na okręgu
+      letters.forEach((char, i) => {
+        const el = document.createElement('div');
+        el.className = 'cipher-char';
+        el.textContent = char === ' ' ? '•' : CHARS[Math.floor(Math.random() * CHARS.length)];
+        el.dataset.final = char === ' ' ? '•' : char;
+
+        const angle = (i / total) * Math.PI * 2 - Math.PI / 2;
+        const x = Math.cos(angle) * RADIUS;
+        const y = Math.sin(angle) * RADIUS;
+        el.style.transform = `translate(${x}px, ${y}px)`;
+
+        container.appendChild(el);
+      });
+
+      const allChars = container.querySelectorAll('.cipher-char');
+
+      // Faza 1: losowe mruganie przez \~4 sekundy
+      let blinkCount = 0;
+      const blinkInterval = setInterval(() => {
+        allChars.forEach(el => {
+          if (Math.random() > 0.7) {
+            el.classList.add('blink');
+            el.textContent = CHARS[Math.floor(Math.random() * CHARS.length)];
+            setTimeout(() => el.classList.remove('blink'), 180);
+          }
+        });
+        blinkCount++;
+        if (blinkCount > 22) {
+          clearInterval(blinkInterval);
+          decrypt();
+        }
+      }, 160);
+
+      // Faza 2: odszyfrowanie po kolei
+      function decrypt() {
+        let i = 0;
+        const decryptInterval = setInterval(() => {
+          if (i >= allChars.length) {
+            clearInterval(decryptInterval);
+            return;
+          }
+          const el = allChars[i];
+          el.textContent = el.dataset.final;
+          el.classList.add('revealed');
+          el.classList.remove('blink');
+          i++;
+        }, 90);
+      }
+    }
   </script>
 </body>
 </html>
